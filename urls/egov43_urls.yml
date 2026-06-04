@@ -1,0 +1,15 @@
+documents:
+  - id: egov43-dev-guide
+    title: 전자정부 표준프레임워크 개발환경 4.3
+    category: development
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:dev4.3"
+
+  - id: egov43-runtime-guide
+    title: 전자정부 표준프레임워크 실행환경 4.3
+    category: runtime
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte4.3"
+
+  - id: egov43-migration-runtime
+    title: 실행환경 업그레이드 가이드 4.2 to 4.3
+    category: migration
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rtemigration4.3"

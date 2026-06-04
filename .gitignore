@@ -1,0 +1,17 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Embedding
+embeddings/
+*.pkl
+
+# HuggingFace Cache
+.cache/
+
+# VSCode
+.vscode/
+
+# Logs
+*.log

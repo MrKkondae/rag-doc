@@ -1,0 +1,248 @@
+# id: egovframework-rte4-3-itl-integration_service-metadata
+# title: Metadata
+# category: runtime
+# source_url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aitl%3Aintegration_service%3Ametadata
+# collected_by: collect_egov_wiki.py
+
+====== Metadata ======
+
+===== 개요 =====
+Integration 서비스 Metadata는 연계에 필요한 정보를 정의하고 있다.\\
+본 장은 실제 Integration 서비스로 구현된 연계 Adaptor를 사용하는 방식에 직접적인 도움을 주지는 않는다. 실제 사용법은 [[eGovframework:RTE2:ITL:Integration Service:연계 서비스 API]]에서 설명하고 있다. 단, 연계 서비스 API의 핵심 Interface인 EgovIntegrationService의 단위에 해당하는 연계등록정보와, 이와 관련된 기관, 시스템, 서비스 등의 Metadata를 이해하는 것은 API 사용에 도움이 될 수 있다.
+
+===== 설명 =====
+
+==== 논리모델 ====
+Integration 서비스 Metadata의 논리모델은 연계를 위해 필요한 논리적인 정보를 정의한다.
+
+=== 논리ERD ===
+Integration 서비스 Metadata의 논리ERD 및 Entity 설명은 다음과 같다. \\
+  * ERD의 Entity attribute의 Notation은 <nowiki>"<name> : <data type> <domain>"</nowiki> 이다.
+
+{{:egovframework:rte:itl:integration_service:metadata_논리_erd.png|Integration 서비스 Metadata 논리ERD}}
+
+^  Entity	^  설명  ^
+| 기관		| 연계 서비스를 제공 또는 사용하는 기관을 나타낸다.\\ 하나의 기관은 다수의 시스템을 가지고 있다.  |
+| 시스템		| 연계 서비스를 제공 또는 사용하는 시스템을 나타낸다.\\ 하나의 시스템은 반드시 하나의 기관에 속하며, 다수의 서비스를 가지고 있다.  |
+| 서비스		| 연계 서비스를 제공하는 단위를 나타낸다.\\ 하나의 서비스는 반드시 하나의 시스템에 속한다.  |
+| 연계등록정보	| 연계 서비스를 사용하기 위한 단위를 나타낸다.\\ 연계 요청 시스템이 연계 제공 서비스를 사용하기 위해서 등록해야 하는 정보를 담고 있다.  |
+| 레코드타입	| 연계에 사용되는 메시지의 형태를 나타낸다.\\ <Key, Value> 쌍의 정보를 담고 있는 레코드 형태의 타입을 정의하고 있다.\\ 하나의 레코드타입은 다수의 레코드필드를 가지고 있다.  |
+| 레코드필드	| 레코드타입에 속하는 내부 필드의 정의를 나타낸다.\\ 필드의 이름과 타입을 정의한다.\\ 하나의 레코드필드는 반드시 하나의 레코드타입에 속한다.  |
+
+=== 논리모델 Domain 설명 ===
+^  Domain	^  Data Type	^  설명									^  비고 				^
+| 기관ID		| CHAR(8)	| 연계 서비스를 제공 또는 사용하는 기관의 ID를 나타낸다.			| [[#ID 체계]] 참조		|
+| 시스템ID	| CHAR(8)	| 연계 서비스를 제공 또는 사용하는 시스템의 ID를 나타낸다.			| [[#ID 체계]] 참조		|
+| 서비스ID	| CHAR(8)	| 연계 서비스의 ID를 나타낸다.						| [[#ID 체계]] 참조		|
+| 타입ID		| VARCHAR(40)	| 메시지를 구성하는 각 구성 요소의 형식인 타입의 ID를 나타낸다.			| [[#ID 체계]] 참조		|
+| 모듈ID		| VARCHAR(40)	| 연계 서비스를 제공하기 위해 등록되어 있는 서비스 제공 모듈의 ID를 나타낸다.	| [[#ID 체계]] 참조		|
+| Boolean	| CHAR(1)	| 참/거짓(true/false) 등의 논리값을 나타낸다.				| 'Y' : true\\ 'N' : false	|
+| Number	| INTEGER	| 일반적인 정수를 나타낸다.						|				|
+| 일시		| DATTIME	| 일자와 시각을 포함하는 일시를 나타낸다.					|				|
+| 이름		| VARCHAR(40)	| 기관, 시스템, 서비스 등의 각종 이름을 나타낸다.				|				|
+
+=== 논리모델 Entity 설명 ===
+
+== 기관 ==
+^  Entity 명	||| 기관  |||
+^  설명		||| 연계 서비스를 제공 또는 사용하는 기관을 나타낸다.\\ 하나의 기관은 다수의 시스템을 가지고 있다.  |||
+^  Attribute	||||||
+^  Seq	^  PK	^  Attribute명	^  Domain	^  Data Type	^  설명  ^
+|  1	|  Y	| 기관ID		| 기관ID		| CHAR(8)	| 기관의 ID이다.  |
+|  2	|	| 기관명		| 이름		| VARCHAR(40)	| 기관의 이름이다.  |
+
+== 시스템 ==
+^  Entity 명	||| 시스템  |||
+^  설명		||| 연계 서비스를 제공 또는 사용하는 시스템을 나타낸다.\\ 하나의 시스템은 반드시 하나의 기관에 속하며, 다수의 서비스를 가지고 있다.  |||
+^  Attribute	||||||
+^  Seq	^  PK	^  Attribute명	^  Domain	^  Data Type	^  설명  ^
+|  1	|  Y	| 기관ID		| 기관ID		| CHAR(8)	| 기관의 ID이다.  |
+|  2	|  Y	| 시스템ID	| 시스템ID	| CHAR(8)	| 시스템의 ID이다.  |
+|  3	|	| 시스템명	| 이름		| VARCHAR(40)	| 시스템의 이름이다.  |
+|  4	|	| 표준여부	| Boolean	| CHAR(1)	| 표준 준수 여부를 나타낸다.  |
+
+== 서비스 ==
+^  Entity 명	||| 서비스 |||
+^  설명		||| 연계 서비스를 제공하는 단위를 나타낸다.\\ 하나의 서비스는 반드시 하나의 시스템에 속한다.  |||
+^  Attribute	||||||
+^  Seq	^  PK	^  Attribute명		^  Domain	^  Data Type	^  설명  ^
+|  1	|  Y	| 기관ID			| 기관ID		| CHAR(8)	| 기관의 ID이다.  |
+|  2	|  Y	| 시스템ID		| 시스템ID	| CHAR(8)	| 시스템의 ID이다.  |
+|  3	|  Y	| 서비스ID		| 서비스ID	| CHAR(8)	| 서비스의 ID이다.  |
+|  4	|	| 서비스명		| 이름		| VARCHAR(40)	| 서비스의 이름이다.  |
+|  5	|	| 요청메시지타입ID	| 타입ID		| VARCHAR(40)	| 요청 메시지의 타입 ID이다.  |
+|  6	|	| 응답메시지타입ID	| 타입ID		| VARCHAR(40)	| 응답 메시지의 타입 ID이다.  |
+|  7	|	| 응답모듈ID		| 모듈ID		| VARCHAR(40)	| 실제 서비스를 제공하는 응답 모듈의 ID이다.  |
+|  8	|	| 표준여부		| Boolean	| CHAR(1)	| 표준 준수 여부를 나타낸다.  |
+|  9	|	| 사용여부		| Boolean	| CHAR(1)	| 서비스의 사용 여부를 나타낸다.  |
+
+== 연계등록정보 ==
+^  Entity 명	||| 연계등록정보  |||
+^  설명		||| 연계 서비스를 사용하기 위한 단위를 나타낸다.\\ 연계 요청 시스템이 연계 제공 서비스를 사용하기 위해서 등록해야 하는 정보를 담고 있다.  |||
+^  Attribute	||||||
+^  Seq	^  PK	^  Attribute명		^  Domain	^  Data Type	^  설명  ^
+|  1	|  Y	| 제공기관ID		| 기관ID		| CHAR(8)	| 서비스를 제공하는 기관의 ID이다.  |
+|  2	|  Y	| 제공시스템ID		| 시스템ID	| CHAR(8)	| 서비스를 제공하는 시스템의 ID이다.  |
+|  3	|  Y	| 제공서비스ID		| 서비스ID	| CHAR(8)	| 서비스를 제공하는 서비스의 ID이다.  |
+|  4	|  Y	| 요청기관ID		| 기관ID		| CHAR(8)	| 서비스를 요청하는 기관의 ID이다.  |
+|  5	|  Y	| 요청시스템ID		| 시스템ID	| CHAR(8)	| 서비스를 요청하는 시스템의 ID이다.  |
+|  6	|	| DefaultTimeout	| Number	| INTEGER	| 서비스 요청 시 사용되는 default timeout 값이다.  |
+|  7	|	| 사용여부		| Boolean	| CHAR(1)	| 등록된 연계의 사용 여부를 나타낸다.  |
+|  8	|	| 유효시작일시		| 일시		| DATEIME	| 등록된 연계가 유효한 기간의 시작 일시를 나타낸다.  |
+|  9	|	| 유효종료일시		| 일시		| DATEIME	| 등록된 연계가 유효한 기간의 종료 일시를 나타낸다.  |
+
+== 레코드타입 ==
+^  Entity 명	||| 레코드타입  |||
+^  설명		||| 연계에 사용되는 메시지의 형태를 나타낸다.\\ <Key, Value> 쌍의 정보를 담고 있는 레코드 형태의 타입을 정의하고 있다.\\ 하나의 레코드타입은 다수의 레코드필드를 가지고 있다.  |||
+^  Attribute	||||||
+^  Seq	^  PK	^  Attribute명		^  Domain	^  Data Type	^  설명  ^
+|  1	|  Y	| 레코드타입ID		| 타입ID		| VARCHAR(40)	| 레코드 타입의 ID이다.  |
+|  2	|	| 레코드타입명		| 이름		| VARCHAR(40)	| 레코드 타입의 이름이다.  |
+|  3	|	| 부모레코드타입ID	| 타입ID		| VARCHAR(40)	| 부모 레코드 타입의 ID이다.  |
+
+== 레코드필드 ==
+^  Entity 명	||| 레코드필드  |||
+^  설명		||| 레코드타입에 속하는 내부 필드의 정의를 나타낸다.\\ 필드의 이름과 타입을 정의한다.\\ 하나의 레코드필드는 반드시 하나의 레코드타입에 속한다.  |||
+^  Attribute	||||||
+^  Seq	^  PK	^  Attribute명	^  Domain	^  Data Type	^  설명  ^
+|  1	|  Y	| 레코드타입ID	| 타입ID		| VARCHAR(40)	| 필드가 속한 레코드의 타입 ID이다.  |
+|  2	|  Y	| 필드명		| 이름		| VARCHAR(40)	| 필드의 이름이다.  |
+|  3	|	| 필드타입ID	| 타입ID		| VARCHAR(40)	| 필드의 타입 ID이다.  |
+
+==== 물리모델 ====
+Integration 서비스 Metadata의 물리모델은 논리모델을 실제 물리적인 DB로 구현하기 위한 모델로서, 아래 물리ERD는 Oracle DB를 가정하여 작성된 것이다. 물리모델은 Hibernate 등과 같은 Object Relational Mapping(ORM)을 사용하여 Access하는 것을 고려하여, 복수의 Attribute를 Identifier로 갖는 Entity를 Table로 변환할 때 Surrogate Key를 도입하고, 기존 Identifier는 Unique Constraints로 적용하여 정의되었다.
+
+== 물리ERD ==
+Integration 서비스 Metadata의 물리ERD 및 Table 설명은 다음과 같다. \\
+  * ERD의 Table Column의 Notation은 <nowiki>"<name> : <data type> <domain> <null option> <key>*"</nowiki> 이다.)
+  * 물리ERD의 경우, 각 연계 Adaptor 또는 연계 솔루션, 또는 시스템에 따라 사용하는 DB가 달라지므로 Data Type 등이 변경될 수 있다.
+
+{{:egovframework:rte:itl:integration_service:metadata_물리_erd.png|Integration 서비스 Metadata 물리ERD}}
+
+^  Table		^  Entity  ^  설명  ^
+| ORGANIZATION		| 기관		| 연계 서비스를 제공 또는 사용하는 기관을 나타낸다.\\ 하나의 기관은 다수의 시스템을 가지고 있다.  |
+| SYSTEM		| 시스템		| 연계 서비스를 제공 또는 사용하는 시스템을 나타낸다.\\ 하나의 시스템은 반드시 하나의 기관에 속하며, 다수의 서비스를 가지고 있다.  |
+| SERVICE		| 서비스		| 연계 서비스를 제공하는 단위를 나타낸다.\\ 하나의 서비스는 반드시 하나의 시스템에 속한다.  |
+| INTEGRATION		| 연계등록정보	| 연계 서비스를 사용하기 위한 단위를 나타낸다.\\ 연계 요청 시스템이 연계 제공 서비스를 사용하기 위해서 등록해야 하는 정보를 담고 있다.  |
+| RECORD_TYPE		| 레코드타입	| 연계에 사용되는 메시지의 형태를 나타낸다.\\ <Key, Value> 쌍의 정보를 담고 있는 레코드 형태의 타입을 정의하고 있다.\\ 하나의 레코드타입은 다수의 레코드필드를 가지고 있다.  |
+| RECORD_TYPE_FIELD	| 레코드필드	| 레코드타입에 속하는 내부 필드의 정의를 나타낸다.\\ 필드의 이름과 타입을 정의한다.\\ 하나의 레코드필드는 반드시 하나의 레코드타입에 속한다.  |
+
+=== 물리 모델 Domain 설명 ===
+^  Domain		^  Data Type	^  설명									^  비고			^
+| OrganizationId	| CHAR(8)	| 연계 서비스를 제공 또는 사용하는 기관의 ID를 나타낸다.			| [[#ID 체계]] 참조	|
+| SystemId		| CHAR(8)	| 연계 서비스를 제공 또는 사용하는 시스템의 ID를 나타낸다.			| [[#ID 체계]] 참조	|
+| ServiceId		| CHAR(8)	| 연계 서비스의 ID를 나타낸다.						| [[#ID 체계]] 참조	|
+| TypeId		| VARCHAR2(40)	| 메시지를 구성하는 각 구성 요소의 형식인 타입의 ID를 나타낸다.			| [[#ID 체계]] 참조	|
+| BeanId		| VARCHAR2(40)	| 연계 서비스를 제공하기 위해 등록되어 있는 서비스 제공 모듈의 ID를 나타낸다.	| [[#ID 체계]] 참조	|
+| Boolean		| CHAR(1)	| 참/거짓(true/false) 등의 논리값을 나타낸다.				| 'Y' : true\\ 'N' : false  |
+| Number		| INTEGER	| 일반적인 정수를 나타낸다.						|			|
+| Datetime		| DATEIME	| 일자와 시각을 포함하는 일시를 나타낸다.					|			|
+| Name			| VARCHAR2(40)	| 기관, 시스템, 서비스 등의 각종 이름을 나타낸다.				|			|
+| SurrogateKey		| VARCHAR2(20)	| Composite 형태의 Primary Key를 대체하기 위한 키				|			|
+
+=== 물리 모델 Table 설명 ===
+
+== ORGANIZATION ==
+^  Table 명	||| ORGANIZATION  ^^  Entity  | 기관  ||
+^  설명		||| 연계 서비스를 제공 또는 사용하는 기관을 나타낸다.\\ 하나의 기관은 다수의 시스템을 가지고 있다.  |||||
+^  Column	||||||||
+^  Seq	^  PK	^  Column명			^  한글명		^  Domain		^  Data Type	^  Null 	^  설명  ^
+|  1	|  Y	| ORGANIZATION_ID		| 기관ID			| OrganizationId	| CHAR(8)	|  N		| 기관의 ID이다.  |
+|  2	|	| ORGANIZATION_NAME		| 기관명			| Name			| VARCHAR2(40)	|  N		| 기관의 이름이다.  |
+^  Constraints	||||||||
+| PRIMARY KEY (ORGANIZATION_ID)  ||||||||
+
+== SYSTEM ==
+^  Table 명	||| SYSTEM  ^^  Entity  | 시스템  ||
+^  설명		||| 연계 서비스를 제공 또는 사용하는 시스템을 나타낸다.\\ 하나의 시스템은 반드시 하나의 기관에 속하며, 다수의 서비스를 가지고 있다.  |||||
+^  Column	||||||||
+^  Seq	^  PK	^  Column명			^  한글명		^  Domain		^  Data Type	^  Null 	^  설명  ^
+|  1	|  Y	| SYSTEM_KEY			| 시스템KEY		| SurrogateKey		| VARCHAR2(20)	|  N		| 시스템의 Surrogate Key이다.  |
+|  2	|	| ORGANIZATION_ID		| 기관ID			| OrganizationId	| CHAR(8)	|  N		| 기관의 ID이다.  |
+|  3	|	| SYSTEM_ID			| 시스템ID		| SystemId		| CHAR(8)	|  N		| 시스템의 ID이다.  |
+|  4	|	| SYSTEM_NAME			| 시스템명		| Name			| VARCHAR2(40)	|  N		| 시스템의 이름이다.  |
+|  5	|	| STANDARD_YN			| 표준여부		| Boolean		| CHAR(1)	|  N		| 표준 준수 여부를 나타낸다.  |
+^  Constraints  ||||||||
+| PRIMAEY KEY (SYSTEM_KEY)  ||||||||
+| UNIQUE (ORGANIZATION_ID, SYSTEM_ID)  ||||||||
+| FOREIGN KEY (ORGANIZATION_ID) REFERENCES ORGANIZATION (ORGANIZATION_ID)  ||||||||
+
+== SERVICE ==
+^  Table 명	||| SERVICE  ^^  Entity  | 서비스  ||
+^  설명		||| 연계 서비스를 제공하는 단위를 나타낸다.\\ 하나의 서비스는 반드시 하나의 시스템에 속한다.  |||||
+^  Column	||||||||
+^  Seq	^  PK	^  Column명			^  한글명		^  Domain		^  Data Type	^  Null 	^  설명  ^
+|  1	|  Y	| SERVICE_KEY			| 서비스KEY		| SurrogateKey		| VARCHAR2(20)	|  N		| 서비스의 Surrogate Key이다.  |
+|  2	|	| SYSTEM_KEY			| 시스템KEY		| SurrogateKey		| VARCHAR2(20)	|  N		| 시스템의 Surrogate Key이다.  |
+|  3	|	| SERVICE_ID			| 서비스ID		| ServiceId		| CHAR(8)	|  N		| 서비스의 ID이다.  |
+|  4	|	| SERVICE_NAME			| 서비스명		| Name			| VARCHAR2(40)	|  N		| 서비스의 이름이다.  |
+|  5	|	| REQUEST_MESSAGE_TYPE_ID	| 요청메시지타입ID	| TypeId		| VARCHAR2(40)	|  N		| 요청 메시지의 타입 ID이다.  |
+|  6	|	| RESPONSE_MESSAGE_TYPE_ID	| 응답메시지타입ID	| TypeId		| VARCHAR2(40)	|  N		| 응답 메시지의 타입 ID이다.  |
+|  7	|	| SERVICE_PROVIDER_BEAN_ID	| 응답모듈ID		| BeanId		| VARCHAR2(40)	|  Y		| 실제 서비스를 제공하는 응답 모듈의 ID이다.  |
+|  8	|	| STANDARD_YN			| 표준여부		| Boolean		| CHAR(1)	|  N		| 표준 준수 여부를 나타낸다.  |
+|  9	|	| USING_YN			| 사용여부		| Boolean		| CHAR(1)	|  N		| 서비스의 사용 여부를 나타낸다.  |
+^  Constraints  ||||||||
+| PRIMARY KEY (SERVICE_KEY)  ||||||||
+| UNIQUE (SYSTEM_KEY, SERVICE_ID)  ||||||||
+| FOREIGN KEY (SYSTEM_KEY) REFERENCES SYSTEM (SYSTEM_KEY)  ||||||||
+
+== INTEGRATION ==
+^  Table 명	||| INTEGRATION  ^^  Entity  | 연계등록정보  ||
+^  설명		||| 연계 서비스를 사용하기 위한 단위를 나타낸다.\\ 연계 요청 시스템이 연계 제공 서비스를 사용하기 위해서 등록해야 하는 정보를 담고 있다.  |||||
+^  Column	||||||||
+^  Seq	^  PK	^  Column명			^  한글명		^  Domain		^  Data Type	^  Null 	^  설명  ^
+|  1	|  Y	| INTEGRATION_ID		| 연계ID			| Surrogate Key		| VARCHAR2(20)	|  N		| 연계등록정보의 Surrogate Key이다.  |
+|  2	|	| PROVIDER_SERVICE_KEY		| 제공서비스KEY		| Surrogate Key		| VARCHAR2(20)	|  N		| 서비스를 제공하는 서비스의 Surrogate Key이다.  |
+|  3	|	| CONSUMER_SYSTEM_KEY		| 요청시스템KEY		| Surrogate Key		| VARCHAR2(20)	|  N		| 서비스를 요청하는 시스템의 Surrogate Key이다.  |
+|  4	|	| DEFAULT_TIMEOUT		| DefaultTimeout	| Number		| INTEGER	|  N		| 서비스 요청 시 사용되는 default timeout 값이다.  |
+|  5	|	| USING_YN			| 사용여부		| Boolean		| CHAR(1)	|  N		| 등록된 연계의 사용 여부를 나타낸다.  |
+|  6	|	| VALIDATE_FROM			| 유효시작일시		| Datetime		| DATETIME	|  Y		| 등록된 연계가 유효한 기간의 시작 일시를 나타낸다.  |
+|  7	|	| VALIDATE_TO			| 유효종료일시		| Datetime		| DATETIME	|  Y		| 등록된 연계가 유효한 기간의 종료 일시를 나타낸다.  |
+^  Constraints  ||||||||
+| PRIMARY KEY (INTEGRATION_ID)  ||||||||
+| UNIQUE (PROVIDER_SERVICE_KEY, CONSUMER_SYSTEM_KEY)  ||||||||
+| FOREIGN KEY (PROVIDER_SERVICE_KEY) REFERENCES SERVICE (SERVICE_KEY)  ||||||||
+| ROREIGN KEY (CONSUMER_SYSTEM_KEY) REFERENCES SYSTEM (SYSTEM_KEY)  ||||||||
+
+== RECORD_TYPE ==
+^  Table 명	||| RECORD_TYPE  ^^  Entity  | 레코드타입  ||
+^  설명		||| 연계에 사용되는 메시지의 형태를 나타낸다.\\ <Key, Value> 쌍의 정보를 담고 있는 레코드 형태의 타입을 정의하고 있다.\\ 하나의 레코드타입은 다수의 레코드필드를 가지고 있다.  |||||
+^  Column	||||||||
+^  Seq	^  PK	^  Column명			^  한글명		^  Domain		^  Data Type	^  Null 	^  설명  ^
+|  1	|  Y	| RECORD_TYPE_ID		| 레코드타입ID		| TypeId		| VARCHAR2(40)	|  N		| 레코드 타입의 ID이다.  |
+|  2	|	| RECORD_TYPE_NAME		| 레코드타입명		| Name			| VARCHAR2(40)	|  N		| 레코드 타입의 이름이다.  |
+|  3	|	| PARENT_RECORD_TYPE_ID		| 부모레코드타입ID	| TypeId		| VARCHAR2(40)	|  Y		| 부모 레코드 타입의 ID이다.  |
+^  Constraints  ||||||||
+| PRIMARY KEY (RECORD_TYPE_ID)  ||||||||
+| FOREIGN KEY (PARENT_RECORD_TYPE_ID) REFERENCES RECORD_TYPE (RECORD_TYPE_ID)  ||||||||
+
+== RECORD_TYPE_FIELD ==
+^  Table 명	||| RECORD_TYPE_FIELD  ^^  Entity  | 레코드필드  ||
+^  설명		||| 레코드타입에 속하는 내부 필드의 정의를 나타낸다.\\ 필드의 이름과 타입을 정의한다.\\ 하나의 레코드필드는 반드시 하나의 레코드타입에 속한다.  |||||
+^  Column	||||||||
+^  Seq	^  PK	^  Column명			^  한글명		^  Domain		^  Data Type	^  Null 	^  설명  ^
+|  1	|  Y	| RECORD_TYPE_ID		| 레코드타입ID		| TypeId		| VARCHAR2(40)	|  N		| 필드가 속한 레코드의 타입 ID이다.  |
+|  2	|  Y	| RECORD_FIELD_NAME		| 필드명			| Name			| VARCHAR2(40)	|  N		| 필드의 이름이다.  |
+|  3	|	| RECORD_FIELD_TYPE_ID		| 필드타입ID		| TypeId		| VARCHAR2(40)	|  N		| 필드의 타입 ID이다.  |
+^  Constraints  ||||||||
+| PRIMARY KEY (RECORD_TYPE_ID, RECORD_FIELD_NAME)  ||||||||
+| FOREIGN KEY (RECORD_TYPE_ID) REFERENCES RECORD_TYPE (RECORD_TYPE_ID)  ||||||||
+
+==== Metadata Java Classes ===
+Integration 서비스의 Metadata를 읽어오기 위한 Java Class를 정의하고 있다.
+
+=== ClassDiagram ===
+{{:egovframework:rte:itl:integration_service:integration_service_metadata_vo_classdiagram_2.png|Integration 서비스 Metadata ClassDiagram}}
+
+==== ID 체계 ====
+Integration 서비스 Metadata의 ID 체계는 다음과 같다.
+
+^  ID		^  영문명		^  Data Type	^  형태				^  제약사항		^
+| 기관ID		| OrganizationId	| CHAR(8)	| 기관을 의미하는 Prefix ‘ORG’ 이후에 숫자 ‘0’으로 채워진 5자리 정수\\ Ex) ORG00000, ORG00001, ORG99999  | • 모든 기관은 반드시 Unique한 ID를 가져야 한다.  |
+| 시스템ID	| SystemId		| CHAR(8)	| 시스템을 의미하는 Prefix ‘SYS’ 이후에 숫자 ‘0’으로 채워진 5자리 정수\\ Ex) SYS00000, SYS00001, SYS99999  | • 동일한 기관에 속한 모든 시스템은 반드시 Unique한 ID를 가져야 한다. (서로 다른 기관에 속한 시스템은 같은 ID를 가질 수 있다.)  |
+| 서비스ID	| ServiceId		| CHAR(8)	| 서비스를 의미하는 Prefix ‘SRV’ 이후에 숫자 ‘0’으로 채워진 5자리 정수\\ Ex) SRV00000, SRV00001, SRV99999  | • 동일한 시스템에 속한 모든 서비스는 반드시 Unique한 ID를 가져야 한다. (서로 다른 시스템에 속한 시스템은 같은 ID를 가질 수 있다.)  |
+| 타입ID		| TypeId		| VARCHAR2(40)	| 알파벳 대소문자, 숫자, ‘_’ 로 구성된 길이 1 ~ 40 사이의 문자열\\ Ex) messageType0000, record_ABC  | • 모든 타입은 Unique한 ID를 가져야 한다.\\ • 메타데이터로 저장되는 레코드타입의 ID는 다음의 Reserved 값을 가질 수 없다.boolean, string, byte, short, integer, long, biginteger, float, double, bigdecimal, calendar  |
+| 모듈ID		| BeanId		| VARCHAR2(40)	| 알파벳 대소문자, 숫자, ‘_’ 로 구성된 길이 1 ~ 40 사이의 문자열\\ Ex) serviceProviderA, bean_123  | • 모듈ID는 전자정부 개발프레임워크의 기반이 되는 Spring Framework에 등록되는 Bean Id이다.  |
+
+===== 참고자료 =====
+N/A
