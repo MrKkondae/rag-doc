@@ -1,3 +1,4 @@
+import argparse
 import pickle
 from pathlib import Path
 
@@ -6,16 +7,34 @@ from sentence_transformers import SentenceTransformer
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-
-EMBEDDING_FILE = BASE_DIR / "embeddings" / "egov43_embeddings.pkl"
+SOURCE_CHOICES = ["migration", "rte43", "com43", "dev43"]
 TOP_K = 5
 
 
-def load_embedding_store() -> dict:
-    if not EMBEDDING_FILE.exists():
-        raise FileNotFoundError(f"Embedding 파일이 없습니다: {EMBEDDING_FILE}")
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Interactive search test for eGovFrame chunk embeddings."
+    )
+    parser.add_argument(
+        "--source",
+        required=True,
+        choices=SOURCE_CHOICES,
+        help="Knowledge base name to search",
+    )
+    parser.add_argument(
+        "--top-k",
+        type=int,
+        default=TOP_K,
+        help="Number of search results to show",
+    )
+    return parser.parse_args()
 
-    with EMBEDDING_FILE.open("rb") as f:
+
+def load_embedding_store(embedding_file: Path) -> dict:
+    if not embedding_file.exists():
+        raise FileNotFoundError(f"Embedding file not found: {embedding_file}")
+
+    with embedding_file.open("rb") as f:
         data = pickle.load(f)
 
     return data
@@ -48,35 +67,54 @@ def keyword_boost(query: str, chunk: dict) -> float:
         "maven",
         "pom.xml",
         "log4j2",
+        "egovpropertyservice",
+        "propertyservice",
+        "property service",
+        "idgeneration",
+        "id generation",
+        "egovidgnrservice",
+        "transaction",
+        "transactionmanager",
+        "mybatis",
+        "sqlmap",
+        "egovabstractdao",
+        "aop",
+        "aspect",
+        "exception",
+        "exceptionhandler",
+        "batch",
+        "quartz",
+        "spring mvc",
+        "controller",
+        "datasource",
+        "fileupload",
+        "multipart",
+        "validation",
+        "validator",
     ]
 
     for term in important_terms:
         if term in query_lower and term in text:
             boost += 0.08
 
-    # 패키지명 변경 질문일 때 Maven/POM/dependency 관련 chunk 우대
+    # Prefer migration/package rename evidence for migration-style questions.
     if "패키지명" in query_lower and "변경" in query_lower:
         heading = chunk.get("heading", "").lower()
         content = chunk.get("content", "").lower()
         category = chunk.get("category", "").lower()
 
-        # migration 문서 우대
         if category == "migration":
             boost += 0.04
 
-        # 제목이 Maven을 사용하는 경우면 강하게 우대
         if "maven을 사용하는 경우" in heading:
             boost += 0.12
 
-        # 정확한 패키지명 근거가 있으면 우대
         if "org.egovframe.rte" in content:
             boost += 0.08
 
-        # groupId/artifactId는 둘 다 있을 때만 우대
         if "groupid" in content and "artifactid" in content:
             boost += 0.05
 
-        # 단순 maven/pom.xml은 약하게만 우대
         if "pom.xml" in content:
             boost += 0.02
 
@@ -112,25 +150,29 @@ def print_result(rank: int, score: float, chunk: dict) -> None:
 
     print("=" * 100)
     print(f"[{rank}] score: {score:.4f}")
-    print(f"문서명: {chunk.get('document_title', '')}")
-    print(f"제목: {chunk.get('heading', '')}")
-    print(f"카테고리: {chunk.get('category', '')}")
-    print(f"태그: {', '.join(chunk.get('tags', []))}")
-    print(f"소스파일: {chunk.get('source_file', '')}")
-    print(f"URL: {chunk.get('source_url', '')}")
+    print(f"document_title: {chunk.get('document_title', '')}")
+    print(f"heading: {chunk.get('heading', '')}")
+    print(f"category: {chunk.get('category', '')}")
+    print(f"tags: {', '.join(chunk.get('tags', []))}")
+    print(f"source_file: {chunk.get('source_file', '')}")
+    print(f"url: {chunk.get('source_url', '')}")
     print("-" * 100)
     print(preview)
     print()
 
 
-def search(query: str, top_k: int = TOP_K) -> None:
-    data = load_embedding_store()
+def search(query: str, embedding_file: Path, top_k: int = TOP_K) -> None:
+    data = load_embedding_store(embedding_file)
 
+    store_source = data.get("source", "")
     model_name = data["model_name"]
     chunks = data["chunks"]
     embeddings = data["embeddings"]
 
-    print(f"모델 로딩: {model_name}")
+    if store_source:
+        print(f"embedding source: {store_source}")
+
+    print(f"loading model: {model_name}")
     model = SentenceTransformer(model_name)
 
     query_text = build_query_text(query)
@@ -145,27 +187,39 @@ def search(query: str, top_k: int = TOP_K) -> None:
     results = cosine_search(query, query_embedding, embeddings, chunks, top_k)
 
     print()
-    print(f"질문: {query}")
-    print(f"검색 결과 Top {top_k}")
+    print(f"query: {query}")
+    print(f"Top {top_k} results")
     print()
 
     for rank, (idx, vector_score, boost, final_score) in enumerate(results, start=1):
         print_result(rank, final_score, chunks[idx])
-        print(f"vector_score: {vector_score:.4f}, keyword_boost: {boost:.4f}, final_score: {final_score:.4f}")
+        print(
+            f"vector_score: {vector_score:.4f}, "
+            f"keyword_boost: {boost:.4f}, "
+            f"final_score: {final_score:.4f}"
+        )
+
 
 def main() -> None:
-    print("eGovFrame 4.3 Chunk 검색 테스트")
-    print("종료하려면 빈 값 입력")
+    args = parse_args()
+    source = args.source
+    top_k = args.top_k
+    embedding_file = BASE_DIR / "embeddings" / f"{source}_embeddings.pkl"
+
+    print("eGovFrame chunk search")
+    print(f"source: {source}")
+    print(f"embedding file: {embedding_file.relative_to(BASE_DIR)}")
+    print("Press Enter on an empty prompt to exit.")
     print()
 
     while True:
-        query = input("질문> ").strip()
+        query = input("query> ").strip()
 
         if not query:
-            print("종료합니다.")
+            print("Exiting.")
             break
 
-        search(query, TOP_K)
+        search(query, embedding_file, top_k)
 
 
 if __name__ == "__main__":

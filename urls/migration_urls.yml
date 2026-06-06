@@ -1,15 +1,55 @@
 documents:
-  - id: egov43-dev-guide
-    title: 전자정부 표준프레임워크 개발환경 4.3
-    category: development
-    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:dev4.3"
-
-  - id: egov43-runtime-guide
-    title: 전자정부 표준프레임워크 실행환경 4.3
-    category: runtime
-    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte4.3"
-
   - id: egov43-migration-runtime
     title: 실행환경 업그레이드 가이드 4.2 to 4.3
     category: migration
     url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rtemigration4.3"
+
+  - id: egov43-data-access
+    title: Data Access 서비스
+    category: runtime
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3.5:psl:data_access"
+
+  - id: egov43-mybatis
+    title: MyBatis 연동
+    category: runtime
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3.5:psl:dataaccess"
+
+  - id: egov43-common-components
+    title: 공통컴포넌트 개발 가이드
+    category: common
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:com"
+
+  - id: egov43-runtime
+    title: 실행환경 가이드
+    category: runtime
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte"
+
+  - id: egov43-development
+    title: 개발환경 가이드
+    category: development
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:dev"
+
+  - id: egov43-batch
+    title: Batch Processing
+    category: runtime
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte:brte"
+
+  - id: egov43-persistence
+    title: Persistence Layer
+    category: runtime
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte:psl"
+
+  - id: egov43-foundation
+    title: Foundation Layer
+    category: runtime
+    url: "SqlMapClientFactoryBean"
+
+  - id: egov35-psl-data-access
+  title: Data Access 서비스
+  category: migration-reference
+  url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3.5:psl:data_access"
+
+- id: egov3-psl-dataaccess-spring-ibatis-integration
+  title: Spring-iBATIS Integration
+  category: migration-reference
+  url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3:psl:dataaccess:spring_ibatis_integration"

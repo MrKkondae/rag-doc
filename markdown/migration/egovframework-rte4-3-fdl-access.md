@@ -1,8 +1,8 @@
 ---
 id: "egovframework-rte4-3-fdl-access"
-title: "Session 방식 접근제어"
+title: "다음"
 version: "4.3"
-category: "runtime"
+category: "migration"
 source: "eGovFrame Wiki"
 source_url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aaccess"
 format: "markdown"

@@ -1,8 +1,8 @@
 ---
 id: "egovframework-rte4-3-fdl-crypto"
-title: "crypto 간소화"
+title: "다음"
 version: "4.3"
-category: "runtime"
+category: "migration"
 source: "eGovFrame Wiki"
 source_url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Acrypto"
 format: "markdown"

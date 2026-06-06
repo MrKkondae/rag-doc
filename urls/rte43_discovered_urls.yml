@@ -1,0 +1,423 @@
+documents:
+- id: egovframework-rte3-5-psl-data-mongodb-repositories
+  title: MongoDB Repositories
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.5%3Apsl%3Adata%3Amongodb%3Arepositories
+  page_id: egovframework:rte3.5:psl:data:mongodb:repositories
+- id: egovframework-rte3-5-psl-data-mongodb-repositories3-5-1
+  title: MongoDB Repositories 3.5.1
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.5%3Apsl%3Adata%3Amongodb%3Arepositories3_5_1
+  page_id: egovframework:rte3.5:psl:data:mongodb:repositories3_5_1
+- id: egovframework-rte3-5-psl-data-mongodb-support
+  title: MongoDB support
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.5%3Apsl%3Adata%3Amongodb%3Asupport
+  page_id: egovframework:rte3.5:psl:data:mongodb:support
+- id: egovframework-rte3-5-psl-data-mongodb-support3-5-1
+  title: MongoDB support 3.5.1
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.5%3Apsl%3Adata%3Amongodb%3Asupport3_5_1
+  page_id: egovframework:rte3.5:psl:data:mongodb:support3_5_1
+- id: egovframework-rte3-5-psl-data-access
+  title: iBatis
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.5%3Apsl%3Adata_access
+  page_id: egovframework:rte3.5:psl:data_access
+- id: egovframework-rte3-5-ptl-sockjs
+  title: SockJS
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.5%3Aptl%3Asockjs
+  page_id: egovframework:rte3.5:ptl:sockjs
+- id: egovframework-rte3-5-ptl-websocket
+  title: WebSocket
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.5%3Aptl%3Awebsocket
+  page_id: egovframework:rte3.5:ptl:websocket
+- id: egovframework-rte3-6-ptl-bootstrap
+  title: UI - bootstrap
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.6%3Aptl%3Abootstrap
+  page_id: egovframework:rte3.6:ptl:bootstrap
+- id: egovframework-rte3-7-brte
+  title: Center Cut
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.7%3Abrte
+  page_id: egovframework:rte3.7:brte
+- id: egovframework-rte3-7-brte-batch-core-job-remote-launcher
+  title: Remote JobLauncher
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.7%3Abrte%3Abatch_core%3Ajob_remote_launcher
+  page_id: egovframework:rte3.7:brte:batch_core:job_remote_launcher
+- id: egovframework-rte3-9-ptl-jquery-ajax
+  title: jQuery ajax
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.9%3Aptl%3Ajquery_ajax
+  page_id: egovframework:rte3.9:ptl:jquery_ajax
+- id: egovframework-rte3-9-ptl-security
+  title: Security
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.9%3Aptl%3Asecurity
+  page_id: egovframework:rte3.9:ptl:security
+- id: egovframework-rte3-9-ptl-stomp
+  title: STOMP
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.9%3Aptl%3Astomp
+  page_id: egovframework:rte3.9:ptl:stomp
+- id: egovframework-rte3-fdl-excel
+  title: Excel
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Aexcel
+  page_id: egovframework:rte3:fdl:excel
+- id: egovframework-rte3-fdl-ftp
+  title: FTP
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Aftp
+  page_id: egovframework:rte3:fdl:ftp
+- id: egovframework-rte3-fdl-logging
+  title: Logging
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Alogging
+  page_id: egovframework:rte3:fdl:logging
+- id: egovframework-rte3-fdl-logging-log4j-2
+  title: Log4J 2
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Alogging%3Alog4j_2
+  page_id: egovframework:rte3:fdl:logging:log4j_2
+- id: egovframework-rte3-fdl-logging-log4j-2
+  title: 설정 파일을 사용하는 방법
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Alogging%3Alog4j_2%3A%EC%84%A4%EC%A0%95_%ED%8C%8C%EC%9D%BC%EC%9D%84_%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94_%EB%B0%A9%EB%B2%95
+  page_id: egovframework:rte3:fdl:logging:log4j_2:설정_파일을_사용하는_방법
+- id: egovframework-rte3-fdl-logging-log4j-2
+  title: 프로그래밍내에서 직접 설정하는 방법
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Alogging%3Alog4j_2%3A%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EB%82%B4%EC%97%90%EC%84%9C_%EC%A7%81%EC%A0%91_%EC%84%A4%EC%A0%95%ED%95%98%EB%8A%94_%EB%B0%A9%EB%B2%95
+  page_id: egovframework:rte3:fdl:logging:log4j_2:프로그래밍내에서_직접_설정하는_방법
+- id: egovframework-rte3-fdl-logging-slf4j
+  title: SLF4J
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Alogging%3Aslf4j
+  page_id: egovframework:rte3:fdl:logging:slf4j
+- id: egovframework-rte3-fdl-property
+  title: Property
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Aproperty
+  page_id: egovframework:rte3:fdl:property
+- id: egovframework-rte3-fdl-property-service
+  title: Property Service
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Aproperty_service
+  page_id: egovframework:rte3:fdl:property_service
+- id: egovframework-rte3-fdl-property-source
+  title: Property Source
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Aproperty_source
+  page_id: egovframework:rte3:fdl:property_source
+- id: egovframework-rte3-psl-dataaccess-spring-ibatis-integration
+  title: Spring iBatis Integration
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Apsl%3Adataaccess%3Aspring_ibatis_integration
+  page_id: egovframework:rte3:psl:dataaccess:spring_ibatis_integration
+- id: egovframework-rte4-3
+  title: 전자정부프레임워크 실행환경 4.3
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3
+  page_id: egovframework:rte4.3
+- id: egovframework-rte4-3-fdl-access
+  title: Session 방식 접근제어
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aaccess
+  page_id: egovframework:rte4.3:fdl:access
+- id: egovframework-rte4-3-fdl-aop
+  title: AOP
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aaop
+  page_id: egovframework:rte4.3:fdl:aop
+- id: egovframework-rte4-3-fdl-aop-aspectj
+  title: '@AspectJ 어노테이션을 이용한 AOP 구현'
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aaop%3Aaspectj
+  page_id: egovframework:rte4.3:fdl:aop:aspectj
+- id: egovframework-rte4-3-fdl-aop-egovrteaopguide
+  title: 실행환경 AOP 가이드라인
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aaop%3Aegovrteaopguide
+  page_id: egovframework:rte4.3:fdl:aop:egovrteaopguide
+- id: egovframework-rte4-3-fdl-aop-xmlschema
+  title: XML Schema를 이용한 AOP 구현
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aaop%3Axmlschema
+  page_id: egovframework:rte4.3:fdl:aop:xmlschema
+- id: egovframework-rte4-3-fdl-crypto
+  title: crypto 간소화
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Acrypto
+  page_id: egovframework:rte4.3:fdl:crypto
+- id: egovframework-rte4-3-fdl-id-generation
+  title: ID Generation
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aid_generation
+  page_id: egovframework:rte4.3:fdl:id_generation
+- id: egovframework-rte4-3-fdl-ioc-container
+  title: IoC Container
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container
+  page_id: egovframework:rte4.3:fdl:ioc_container
+- id: egovframework-rte4-3-fdl-ioc-container-annotation-based-configuration
+  title: Annotation-based configuration
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Aannotation-based_configuration
+  page_id: egovframework:rte4.3:fdl:ioc_container:annotation-based_configuration
+- id: egovframework-rte4-3-fdl-ioc-container-basics
+  title: Basics
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Abasics
+  page_id: egovframework:rte4.3:fdl:ioc_container:basics
+- id: egovframework-rte4-3-fdl-ioc-container-bean-definition-inheritance
+  title: Bean definition inheritance
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Abean_definition_inheritance
+  page_id: egovframework:rte4.3:fdl:ioc_container:bean_definition_inheritance
+- id: egovframework-rte4-3-fdl-ioc-container-bean-scope
+  title: Bean scope
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Abean_scope
+  page_id: egovframework:rte4.3:fdl:ioc_container:bean_scope
+- id: egovframework-rte4-3-fdl-ioc-container-classpath-scanning-for-managed-components
+  title: Classpath scanning for managed components
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Aclasspath_scanning_for_managed_components
+  page_id: egovframework:rte4.3:fdl:ioc_container:classpath_scanning_for_managed_components
+- id: egovframework-rte4-3-fdl-ioc-container-container-extension-points
+  title: Container extension points
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Acontainer_extension_points
+  page_id: egovframework:rte4.3:fdl:ioc_container:container_extension_points
+- id: egovframework-rte4-3-fdl-ioc-container-customizing-the-nature-of-a-bean
+  title: Customizing the nature of a bean
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Acustomizing_the_nature_of_a_bean
+  page_id: egovframework:rte4.3:fdl:ioc_container:customizing_the_nature_of_a_bean
+- id: egovframework-rte4-3-fdl-ioc-container-dependencies
+  title: Dependencies
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Adependencies
+  page_id: egovframework:rte4.3:fdl:ioc_container:dependencies
+- id: egovframework-rte4-3-fdl-ioc-container-environment-abstraction
+  title: Environment Abstraction
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Aenvironment_abstraction
+  page_id: egovframework:rte4.3:fdl:ioc_container:environment_abstraction
+- id: egovframework-rte4-3-fdl-ioc-container-generic
+  title: Generic
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Ageneric
+  page_id: egovframework:rte4.3:fdl:ioc_container:generic
+- id: egovframework-rte4-3-fdl-ioc-container-inversion-of-control
+  title: 주요 개념 - Inversion of Control
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Ainversion_of_control
+  page_id: egovframework:rte4.3:fdl:ioc_container:inversion_of_control
+- id: egovframework-rte4-3-fdl-ioc-container-java-based-configuration
+  title: Java-based configuration
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Ajava-based_configuration
+  page_id: egovframework:rte4.3:fdl:ioc_container:java-based_configuration
+- id: egovframework-rte4-3-fdl-ioc-container-jsr-330-standard-annotations
+  title: JSR 330 Standard Annotations
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Ajsr_330_standard_annotations
+  page_id: egovframework:rte4.3:fdl:ioc_container:jsr_330_standard_annotations
+- id: egovframework-rte4-3-fdl-ioc-container-the-applicationcontext
+  title: The ApplicationContext
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aioc_container%3Athe_applicationcontext
+  page_id: egovframework:rte4.3:fdl:ioc_container:the_applicationcontext
+- id: egovframework-rte4-3-fdl-resource
+  title: Resource
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aresource
+  page_id: egovframework:rte4.3:fdl:resource
+- id: egovframework-rte4-3-fdl-scheduling
+  title: Scheduling
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Ascheduling
+  page_id: egovframework:rte4.3:fdl:scheduling
+- id: egovframework-rte4-3-fdl-server-security
+  title: Server Security
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aserver_security
+  page_id: egovframework:rte4.3:fdl:server_security
+- id: egovframework-rte4-3-fdl-server-security-architecture
+  title: Architecture
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aserver_security%3Aarchitecture
+  page_id: egovframework:rte4.3:fdl:server_security:architecture
+- id: egovframework-rte4-3-fdl-server-security-authentication
+  title: Authentication
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aserver_security%3Aauthentication
+  page_id: egovframework:rte4.3:fdl:server_security:authentication
+- id: egovframework-rte4-3-fdl-server-security-authorization
+  title: Authorization
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aserver_security%3Aauthorization
+  page_id: egovframework:rte4.3:fdl:server_security:authorization
+- id: egovframework-rte4-3-fdl-server-security-xmlschema
+  title: 설정 간소화
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aserver_security%3Axmlschema
+  page_id: egovframework:rte4.3:fdl:server_security:xmlschema
+- id: egovframework-rte4-3-itl-cloud-data-stream
+  title: Cloud Data Stream
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aitl%3Acloud_data_stream
+  page_id: egovframework:rte4.3:itl:cloud_data_stream
+- id: egovframework-rte4-3-itl-integration-service
+  title: Integration Service
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aitl%3Aintegration_service
+  page_id: egovframework:rte4.3:itl:integration_service
+- id: egovframework-rte4-3-itl-integration-service-metadata
+  title: Metadata
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aitl%3Aintegration_service%3Ametadata
+  page_id: egovframework:rte4.3:itl:integration_service:metadata
+- id: egovframework-rte4-3-itl-integration-service-api
+  title: 연계 서비스 API
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aitl%3Aintegration_service%3A%EC%97%B0%EA%B3%84_%EC%84%9C%EB%B9%84%EC%8A%A4_api
+  page_id: egovframework:rte4.3:itl:integration_service:연계_서비스_api
+- id: egovframework-rte4-3-itl-naming-service
+  title: Naming Service
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aitl%3Anaming_service
+  page_id: egovframework:rte4.3:itl:naming_service
+- id: egovframework-rte4-3-itl-restful
+  title: Restful
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aitl%3Arestful
+  page_id: egovframework:rte4.3:itl:restful
+- id: egovframework-rte4-3-itl-swagger
+  title: Swagger
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aitl%3Aswagger
+  page_id: egovframework:rte4.3:itl:swagger
+- id: egovframework-rte4-3-itl-webservice
+  title: WebService
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aitl%3Awebservice
+  page_id: egovframework:rte4.3:itl:webservice
+- id: egovframework-rte4-3-overview
+  title: 표준프레임워크 실행환경 소개
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aoverview
+  page_id: egovframework:rte4.3:overview
+- id: egovframework-rte4-3-psl-data-source
+  title: Data Source
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Apsl%3Adata_source
+  page_id: egovframework:rte4.3:psl:data_source
+- id: egovframework-rte4-3-psl-reactive-cassandra
+  title: Cassandra
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Apsl%3Areactive%3Acassandra
+  page_id: egovframework:rte4.3:psl:reactive:cassandra
+- id: egovframework-rte4-3-psl-reactive-mongodb
+  title: MongoDB
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Apsl%3Areactive%3Amongodb
+  page_id: egovframework:rte4.3:psl:reactive:mongodb
+- id: egovframework-rte4-3-psl-reactive-preface
+  title: Spring Data - Reactive
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Apsl%3Areactive%3Apreface
+  page_id: egovframework:rte4.3:psl:reactive:preface
+- id: egovframework-rte4-3-psl-reactive-r2dbc
+  title: R2DBC
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Apsl%3Areactive%3Ar2dbc
+  page_id: egovframework:rte4.3:psl:reactive:r2dbc
+- id: egovframework-rte4-3-psl-reactive-redis
+  title: Redis
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Apsl%3Areactive%3Aredis
+  page_id: egovframework:rte4.3:psl:reactive:redis
+- id: egovframework-rte4-3-ptl-jsr303
+  title: Declarative Validation
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Ajsr303
+  page_id: egovframework:rte4.3:ptl:jsr303
+- id: egovframework-rte4-3-ptl-spel
+  title: Spring Expression Language(SpEL)
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Aspel
+  page_id: egovframework:rte4.3:ptl:spel
+- id: egovframework-rte4-3-ptl-validation
+  title: Validation
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Avalidation
+  page_id: egovframework:rte4.3:ptl:validation
+- id: egovframework-rte4-3-ptl-web-reactive
+  title: Web Reactive
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Aweb_reactive
+  page_id: egovframework:rte4.3:ptl:web_reactive
+- id: egovframework-rte4-3-ptl-web-reactive-annotated-controllers
+  title: Annotated Controllers
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Aweb_reactive_annotated_controllers
+  page_id: egovframework:rte4.3:ptl:web_reactive_annotated_controllers
+- id: egovframework-rte4-3-ptl-web-reactive-core
+  title: Reactive Core
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Aweb_reactive_core
+  page_id: egovframework:rte4.3:ptl:web_reactive_core
+- id: egovframework-rte4-3-ptl-web-reactive-dispatcherhandler
+  title: DispatcherHandler
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Aweb_reactive_dispatcherhandler
+  page_id: egovframework:rte4.3:ptl:web_reactive_dispatcherhandler
+- id: egovframework-rte4-3-ptl-web-reactive-functional-endpoints
+  title: Functional Endpoints
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Aweb_reactive_functional_endpoints
+  page_id: egovframework:rte4.3:ptl:web_reactive_functional_endpoints
+- id: egovframework-rte4-3-ptl-web-reactive-webclient
+  title: WebClient
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Aweb_reactive_webclient
+  page_id: egovframework:rte4.3:ptl:web_reactive_webclient
+- id: egovframework-rte4-3-ptl-web-servlet
+  title: Web Servlet
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Aweb_servlet
+  page_id: egovframework:rte4.3:ptl:web_servlet
+- id: egov43-batch-core-job-configuration
+  title: Batch Core - Job Configuration
+  category: rte43
+  url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte4.3:brte:batch_core:job_configuration"
+  tags:
+    - batch
+    - spring-batch
+    - job
+    - jobrepository
+    - joblauncher
+    - jobexecution
+    - jobinstance
+    - rte43
+    - id: egov43-batch-core-job-execution
+  title: Batch Core - Job Execution
+  category: rte43
+  url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte4.3:brte:batch_core:job_execution"
+  tags:
+    - batch
+    - spring-batch
+    - job
+    - jobrepository
+    - joblauncher
+    - jobexecution
+    - jobinstance
+    - stepexecution
+    - rte43

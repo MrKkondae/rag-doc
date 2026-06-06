@@ -1,6 +1,6 @@
 # id: egovframework-rte4-3-fdl-crypto
-# title: crypto 간소화
-# category: runtime
+# title: 다음
+# category: migration
 # source_url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Acrypto
 # collected_by: collect_egov_wiki.py
 

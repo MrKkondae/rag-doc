@@ -1,12 +1,23 @@
+import argparse
 import re
 from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-RAW_DIR = BASE_DIR / "raw" / "egov43"
-MD_DIR = BASE_DIR / "markdown" / "egov43"
+SOURCE_CHOICES = ["migration", "rte43", "com43", "dev43"]
 
-MD_DIR.mkdir(parents=True, exist_ok=True)
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="eGovFrame Wiki raw txt 파일을 Markdown으로 변환합니다."
+    )
+    parser.add_argument(
+        "--source",
+        required=True,
+        choices=SOURCE_CHOICES,
+        help="Markdown으로 변환할 지식베이스 이름",
+    )
+    return parser.parse_args()
 
 
 def parse_raw_header(text: str) -> tuple[dict, str]:
@@ -132,28 +143,24 @@ def convert_links(text: str) -> str:
     [[page_id|label]] -> label
     [[page_id]] -> page_id
     """
-    # 외부 URL + 라벨
     text = re.sub(
         r"\[\[(https?://[^\]|]+)\|([^\]]+)\]\]",
         r"[\2](\1)",
         text,
     )
 
-    # 내부 링크 + 라벨: RAG 본문에서는 라벨만 남김
     text = re.sub(
         r"\[\[([^\]|]+)\|([^\]]+)\]\]",
         r"\2",
         text,
     )
 
-    # 단순 외부 URL
     text = re.sub(
         r"\[\[(https?://[^\]]+)\]\]",
         r"\1",
         text,
     )
 
-    # 단순 내부 링크
     text = re.sub(
         r"\[\[([^\]]+)\]\]",
         r"\1",
@@ -255,6 +262,19 @@ format: "markdown"
 """
 
 
+def convert_namespace(text: str) -> str:
+    """
+    DokuWiki namespace를 code span으로 변환.
+    """
+    pattern = r"(?<!`)(egovframework:[a-zA-Z0-9._:-]+)(?!`)"
+
+    return re.sub(
+        pattern,
+        r"`\1`",
+        text,
+    )
+
+
 def dokuwiki_to_markdown(text: str) -> str:
     text = convert_code_blocks(text)
     text = convert_file_blocks(text)
@@ -262,57 +282,53 @@ def dokuwiki_to_markdown(text: str) -> str:
     text = convert_tables(text)
     text = convert_lists(text)
     text = convert_links(text)
-
-    # 추가
     text = convert_namespace(text)
-
     text = convert_images(text)
     text = convert_formatting(text)
     text = cleanup(text)
     return text
 
 
-def convert_file(raw_file: Path) -> Path:
+def convert_file(raw_file: Path, md_dir: Path) -> Path:
     raw_text = raw_file.read_text(encoding="utf-8")
     meta, body = parse_raw_header(raw_text)
 
     markdown_body = dokuwiki_to_markdown(body)
     yaml_header = build_yaml_header(meta)
 
-    out_file = MD_DIR / f"{raw_file.stem}.md"
+    out_file = md_dir / f"{raw_file.stem}.md"
     out_file.write_text(yaml_header + markdown_body, encoding="utf-8")
 
     return out_file
 
-def convert_namespace(text: str) -> str:
-    """
-    DokuWiki namespace를 code span으로 변환.
-    """
-
-    pattern = r'(?<!`)(egovframework:[a-zA-Z0-9._:-]+)(?!`)'
-
-    return re.sub(
-        pattern,
-        r'`\1`',
-        text
-    )
 
 def main() -> None:
-    raw_files = sorted(RAW_DIR.glob("*.txt"))
+    args = parse_args()
+    source = args.source
+    raw_dir = BASE_DIR / "raw" / source
+    md_dir = BASE_DIR / "markdown" / source
+    md_dir.mkdir(parents=True, exist_ok=True)
+
+    raw_files = sorted(raw_dir.glob("*.txt"))
 
     if not raw_files:
-        print(f"변환할 파일이 없습니다: {RAW_DIR}")
+        print(f"source: {source}")
+        print(f"입력 위치: {raw_dir.relative_to(BASE_DIR)}")
+        print(f"출력 위치: {md_dir.relative_to(BASE_DIR)}")
+        print(f"변환할 파일이 없습니다: {raw_dir}")
         return
 
     success_count = 0
     fail_count = 0
 
+    print(f"source: {source}")
+    print(f"입력 위치: {raw_dir.relative_to(BASE_DIR)}")
+    print(f"출력 위치: {md_dir.relative_to(BASE_DIR)}")
     print(f"변환 대상 파일 수: {len(raw_files)}")
-    print(f"출력 위치: {MD_DIR}")
 
     for raw_file in raw_files:
         try:
-            out_file = convert_file(raw_file)
+            out_file = convert_file(raw_file, md_dir)
             success_count += 1
             print(f"[OK] {raw_file.name} -> {out_file.name}")
         except Exception as e:
@@ -323,6 +339,7 @@ def main() -> None:
     print("Markdown 변환 완료")
     print(f"- 성공: {success_count}")
     print(f"- 실패: {fail_count}")
+    print(f"예시: python scripts/convert_to_markdown.py --source {source}")
 
 
 if __name__ == "__main__":

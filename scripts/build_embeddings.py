@@ -1,29 +1,39 @@
+import argparse
 import json
 import pickle
 from pathlib import Path
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from tqdm import tqdm
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-
-CHUNK_FILE = BASE_DIR / "chunks" / "egov43_chunks.jsonl"
-EMBEDDING_DIR = BASE_DIR / "embeddings"
-OUT_FILE = EMBEDDING_DIR / "egov43_embeddings.pkl"
+SOURCE_CHOICES = ["migration", "rte43", "com43", "dev43"]
 
 MODEL_NAME = "BAAI/bge-m3"
 BATCH_SIZE = 16
 
 
-def load_chunks() -> list[dict]:
-    if not CHUNK_FILE.exists():
-        raise FileNotFoundError(f"Chunk 파일이 없습니다: {CHUNK_FILE}")
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Build embeddings from eGovFrame Wiki chunk files."
+    )
+    parser.add_argument(
+        "--source",
+        required=True,
+        choices=SOURCE_CHOICES,
+        help="Knowledge base name to embed",
+    )
+    return parser.parse_args()
+
+
+def load_chunks(chunk_file: Path) -> list[dict]:
+    if not chunk_file.exists():
+        raise FileNotFoundError(f"Chunk file not found: {chunk_file}")
 
     chunks = []
 
-    with CHUNK_FILE.open("r", encoding="utf-8") as f:
+    with chunk_file.open("r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:
@@ -31,24 +41,24 @@ def load_chunks() -> list[dict]:
             chunks.append(json.loads(line))
 
     if not chunks:
-        raise ValueError("Chunk 데이터가 비어 있습니다.")
+        raise ValueError("Chunk data is empty.")
 
     return chunks
 
 
 def build_embedding_text(chunk: dict) -> str:
     """
-    임베딩에 사용할 텍스트 구성.
-    heading + tags + content를 함께 사용하면 검색 품질이 좋아진다.
+    Build the text used for embedding.
+    Using heading + tags + content tends to improve retrieval quality.
     """
     document_title = chunk.get("document_title", "")
     heading = chunk.get("heading", "")
     tags = ", ".join(chunk.get("tags", []))
     content = chunk.get("content", "")
 
-    return f"""문서명: {document_title}
-제목: {heading}
-태그: {tags}
+    return f"""Document: {document_title}
+Heading: {heading}
+Tags: {tags}
 
 {content}
 """.strip()
@@ -67,10 +77,16 @@ def encode_chunks(model: SentenceTransformer, chunks: list[dict]) -> np.ndarray:
     return np.asarray(embeddings, dtype=np.float32)
 
 
-def save_embeddings(chunks: list[dict], embeddings: np.ndarray) -> None:
-    EMBEDDING_DIR.mkdir(parents=True, exist_ok=True)
+def save_embeddings(
+    chunks: list[dict],
+    embeddings: np.ndarray,
+    out_file: Path,
+    source: str,
+) -> None:
+    out_file.parent.mkdir(parents=True, exist_ok=True)
 
     data = {
+        "source": source,
         "model_name": MODEL_NAME,
         "embedding_dim": int(embeddings.shape[1]),
         "chunk_count": len(chunks),
@@ -78,28 +94,39 @@ def save_embeddings(chunks: list[dict], embeddings: np.ndarray) -> None:
         "embeddings": embeddings,
     }
 
-    with OUT_FILE.open("wb") as f:
+    with out_file.open("wb") as f:
         pickle.dump(data, f)
 
-    print(f"저장 완료: {OUT_FILE}")
+    print(f"Saved: {out_file.relative_to(BASE_DIR)}")
 
 
 def main() -> None:
-    print("Chunk 로딩 시작")
-    chunks = load_chunks()
-    print(f"Chunk 개수: {len(chunks)}")
+    args = parse_args()
+    source = args.source
+    chunk_file = BASE_DIR / "chunks" / f"{source}_chunks.jsonl"
+    embedding_dir = BASE_DIR / "embeddings"
+    out_file = embedding_dir / f"{source}_embeddings.pkl"
 
-    print(f"모델 로딩 시작: {MODEL_NAME}")
+    print("build_embeddings.py started")
+    print(f"source: {source}")
+    print(f"input chunk file: {chunk_file.relative_to(BASE_DIR)}")
+    print(f"output embedding file: {out_file.relative_to(BASE_DIR)}")
+
+    print("Loading chunks")
+    chunks = load_chunks(chunk_file)
+    print(f"Chunk count: {len(chunks)}")
+
+    print(f"Loading model: {MODEL_NAME}")
     model = SentenceTransformer(MODEL_NAME)
-    print("모델 로딩 완료")
+    print("Model loaded")
 
-    print("임베딩 생성 시작")
+    print("Building embeddings")
     embeddings = encode_chunks(model, chunks)
 
-    print("임베딩 생성 완료")
+    print("Embeddings built")
     print(f"Embedding shape: {embeddings.shape}")
 
-    save_embeddings(chunks, embeddings)
+    save_embeddings(chunks, embeddings, out_file, source)
 
 
 if __name__ == "__main__":
