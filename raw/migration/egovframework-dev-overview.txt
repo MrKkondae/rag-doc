@@ -1,0 +1,97 @@
+# id: egovframework-dev-overview
+# title: 개발프레임워크 개발 환경 개요
+# category: development
+# source_url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Adev%3Aoverview
+# collected_by: collect_egov_wiki.py
+
+===== 개요 =====
+전자정부 표준 프레임워크의 개발환경 대해 전체적인 개요를 설명한다. \\
+
+===== 설명 =====
+
+==== 개발환경 목표 ====
+개발환경은 개발자 프로그램 개발에 필요한 IDE 를 기반으로 비즈니스 프로그램 개발, 버전관리, 단위 테스트, 빌드 등의 개발 Life-Cycle 전반에 대한 지원 도구를 제공한다. \\ \\
+  * Implementation Tool
+  * Test Tool
+  * Configuration & Change Management Tool
+  * Deployment Tool
+
+||^전체 구조 및 구성요소||
+||  {{:egovframework:dev:1._개발환경_서비스그룹.jpg|}}  ||
+|^Implementation Tool | 프로그램 개발, 테스트, 디버그 등 개발자 개별 개발환경을 제공|
+|^Test Tool | 개발 프로그램에 대한 단위 테스트용 프로그램 작성 지원 |
+|^Conf. Change Mgt. Tool | 개발 프로그램에 대한\\ 형상 식별, 버전관리,\\ 이슈 관리 및 모니터링 도구 제공 |
+|^Deployment Tool | CI (Continuous Integration)와 서버 이관 관련 도구 제공|
+
+==== 개발 프로세스 ====
+개발환경에서 제공하는 개발환경 도구를 기반으로 개발을 진행할 경우 제시될 수 있는 개발 프로세스이다. \\
+개발 프로세스는 아래의 4개 영역으로 분류되며 각 영역에서 수행하는 상세 프로세스는 그림에서 확인할 수 있다.
+  * 개발자 PC
+  * 형상관리 서버
+  * CI 서버
+  * 어플리케이션 서버
+{{:egovframework:dev:4._개발_프로세스_설계2.jpg|}} \\
+
+===== 환경 설정 =====
+
+==== 기본 환경 ====
+
+^  항목  ^  권장버전  ^  비고  |
+|Java Development Kit|5.0| |
+|Servlet|2.4| |
+|Eclipse IDE for Java EE Developers|3.4|http://www.eclipse.org/downloads/|
+
+==== Eclipse PlugIn 목록 ====
+
+^이름         ^버전  ^참고 사이트                          ^선행작업^자동설치/업데이트주소|
+|AmaterasUML|1.3.1|http://www.eclipse.org/downloads/|GEF 설치| |
+|AmaterasERD|1.0.5|http://amateras.sourceforge.jp/cgi-bin/fswiki_en/wiki.cgi?page=AmaterasUML|GEF,\\ AmaterasUML 설치| |
+|Spring IDE|2.2.1|http://www.springide.org/| | http://dist.springframework.org/release/IDE \\ http://springide.org/updatesite/ |
+|Subversive|1.4.7|http://subclipse.tigris.org/update_1.4.x| | http://download.eclipse.org/technology/subversive/0.7/update-site/ |
+|Subversive SVN Connectors || http://www.polarion.org/index.php?page=download&project=subversive | | http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/ |
+|m2eclipse|0.9.6|http://m2eclipse.sonatype.org/| |http://m2eclipse.sonatype.org/update/ |
+|EclEmma|1.3.2|http://www.eclemma.org/| |http://update.eclemma.org/|
+|JUnit|3.8, 4.3 | Eclipse 3.4 기본제공 (JUnit 3.8,\\JUnit 4.3) |||
+
+==== WAS ====
+
+^이름 ^권장버전 ^자바호환성 ^비고 |
+|Jboss application platform |4.3.0 |JDK 5.0 | |
+|Tmax JEUS |6.0.0.5 |JDK 5.0 이상 | |
+|Oracle WebLogic Server |9.2 |JDK 5.0 이상 | |
+
+
+==== DBMS ====
+
+^이름 ^권장버전 ^비고 |
+|Mysql |5.1.30 | |
+|Tibero |3.0(sp2) | |
+|Altibase DBMS Server |5.1.3.18 | |
+|Oracle |9.2(mp3) | |
+
+==== Open Source Software ====
+
+^서비스 그룹^서비스^^오픈소스 소프트웨어^버전^라이선스^확장 및 개발^
+|Implemtation Tool|Editor|Source Editor|Eclipse|3.4|EPL & EDL| |
+| | |UML Editor|AmaterasUML| |EPL 1.0| |
+| | |ERD Editor|AmaterasERD| |EPL 1.0| |
+| | |DBIO Editor|N/A|||신규 개발 |
+| |Debug|Local Debug|Eclipse| |EPL & EDL| |
+| |Debug|Remote Debug|Eclipse| |EPL & EDL| |
+|TestTool|Unit Test|Test Case|JUnit| |CPL| |
+| | |Mock Support|EasyMock| |MIT| |
+| | |DB Support|DbUnit| |LGPL 2.1| |
+| | |Test Coverage|EMMA| |CPL| |
+| | |Test Automation|Ant, Maven| |Apache License 2.0| |
+| |Test Reporting||Ant, Maven| |Apache License 2.0|기능 추가|
+|Deployment Tool|Build|Build Tool|Maven| |Apache License 2.0| |
+| | |CI Server|Hudson| |Creative Commons Attribution Share-Alike License,MIT| |
+| |Deploy||N/A|||신규 개발 |
+|Conf.&Change Mgt.Tool|Configuration Management||Subversion| |Subversion License| |
+| |Change Management||jTrac| |Apache License 2.0|UI 재개발|
+
+
+===== 사용법 =====
+
+개발환경은 개발자 개발환경을 설정할 경우 단순히 압축만 해제하면 환경 구성이 이루어지도록 필요한 환경구성을 시행착오 없이 쉽게 구성할 수 있도록 지원한다. \\
+포탈을 통해서 필요한 설치 파일을 다운 받을 수 있으며, 사용시 기술지원은 포탈의 질의응답을 이용할 수 있다.

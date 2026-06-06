@@ -3,3 +3,7 @@ documents:
     title: 전자정부프레임워크 실행환경 4.3
     category: rte43
     url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte4.3
+  - id: egovframework-let4-0-configration
+    title: "경량환경 구성 및 환경설정"
+    category: rte43
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Alet4.0%3Aconfigration"

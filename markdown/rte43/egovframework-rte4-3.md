@@ -169,19 +169,6 @@ format: "markdown"
 - eGovframework:rte4.3:itl:Cloud Data Stream
 - Swagger
 ### 배치처리
-배치처리는 대량 데이터를 일괄 처리하기 위한 기능을 제공한다.
-
-Spring Batch 기반으로 Job, Step, JobLauncher,
-JobRepository, JobExecution, StepExecution,
-JobParameters 등의 핵심 컴포넌트로 구성된다.
-
-JobLauncher는 JobParameters를 이용하여 Job을 실행하며,
-실행 결과는 JobExecution을 통해 관리된다.
-
-JobRepository는 JobExecution 및 StepExecution 정보를 저장하여
-배치 수행 이력과 상태를 관리한다.
-
-
 - 배치실행환경소개
 - Batch Core
 - Job Configuration 배치처리 기능 중 Job 설정에 관한 기본 개념 및 사용법에 대해 설명한다.

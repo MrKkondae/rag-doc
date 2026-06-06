@@ -1,0 +1,335 @@
+---
+id: "egovframework-sms"
+title: "SMS 서비스"
+version: "4.3"
+category: "common"
+source: "eGovFrame Wiki"
+source_url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Asms_%EC%84%9C%EB%B9%84%EC%8A%A4"
+format: "markdown"
+---
+
+# 협업 - 문자메시지(SMS) 서비스
+## 개요
+문자메시지(SMS) 서비스는 전자정부 SMS 서비스(모바일 전자정부 M-Gov)를 이용하기 위한 문자메시지 전송 인터페이스를 제공하며 별도의 M-Gov 신청을 통해 사용할 수 있다.
+
+이 문자메시지(SMS) 서비스는 기존 기존 전자정부 표준프레임워크 및 공통컴포넌트의 공통 부분을 활용하고 있는 문자메시지 서비스를 보다 쉽게 활용할 수 있도록
+프레임워크 및 기타 공통모듈의 사용을 제외시켜 놓은 것이다.
+
+전자정부 표준프레임워크가 적용된 경우는 문자메시지 서비스 부분을 적용하면 된다.
+## 전제조건
+문자메시지서비스를 사용하기 위해서는 별도로 전자정부 SMS 서비스(모바일 전자정부 M-Gov)를 신청하여야 하며, 이는 행정안전부 정보통합전산센터에서 주관하고 있다.
+
+서비스 신청 절차는 다음과 같다.
+
+① 서비스이용신청 : 서비스 종류에 따라 별지 1호 내지 3호 서식(해당 사이트 이용규정 참조)의 이용신청서를 센터에 제출
+② 이용통보 : 검토 결과를 접수일로부터 15일 이내에 이용신청기관에게 서면으로 통보
+③ 서비스준비 : 이용신청기관은 센터에서 제공하는 "M-Gov 연동 API"를 사용하여 연동
+④ 서비스개통 : 이용신청기관은 승인 후 60일 이내에 서비스 개통을 하지 않을 경우 센터는 이용통보를 취소할 수 있음
+기타 자세한 정보 확인 및 문의는 모바일 전자정부 M-gov(http://www.mgov.go.kr)를 참고한다.
+## 설명
+문자메시지(SMS) 서비스는 "M-Gov 연동 API"를 통해 SMS서비스를 제공할 뿐만 아니라 전송에 대한 이력 관리를 제공한다.
+(이력 관리가 필요없는 경우를 위해 별도의 메소드를 제공하고 있으나 송신 결과에 대한 내용을 확인할 수 없음)
+##### 관련소스
+| 유형 | 대상소스 | 비고 | 공용여부 |
+| --- | --- | --- | --- |
+| Service | egovframework.com.cop.sms.service.EgovSmsInfoService.java | 문자메시지서비스를 위한 서비스 인터페이스 | Y |
+| ServiceImpl | egovframework.com.cop.sms.service.impl.EgovSmsBasicServiceImpl.java | 문자메시지서비스를 위한 서비스 구현 클래스 |  |
+| ServiceImpl | egovframework.com.cop.sms.service.impl.EgovSmsInfoSender.java | 문자메시지 연동 처리를 위한 클래스 | Y |
+| ServiceImpl | egovframework.com.cop.sms.service.impl.EgovSmsBasicReceiver.java | 문자메시지 연동 결과 수신 처리를 위한 클래스 |  |
+| VO | egovframework.com.cop.sms.service.Sms.java | 문자메시지서비스를 위한 모델 클래스 | Y |
+| VO | egovframework.com.cop.sms.service.SmsVO.java | 문자메시지서비스를 위한 VO 클래스 | Y |
+| VO | egovframework.com.cop.sms.service.SmsConnection.java | 문자메시지서비스를 위한 모델 클래스 (연결정보) | Y |
+| VO | egovframework.com.cop.sms.service.SmsRecptn.java | 문자메시지서비스를 위한 모델 클래스 (수신정보) | Y |
+| DAO | egovframework.com.cop.sms.service.impl.SmsBasicDAO.java | 문자메시지서비스를 위한 데이터처리 클래스 |  |
+| Util | egovframework.com.cop.sms.service.impl.SmsBasicDBUtil.java | 데이터처리 Util (Pool 생성 등) |  |
+
+※ 공용여부는 기존 전자정부 표준프레임워크를 활용하는 문자메시지 서비스와 공통적으로 사용하는 클래스를 나타냄
+##### 관련테이블
+| 테이블명 | 테이블명(영문) | 비고 |
+| --- | --- | --- |
+| 문자메시지 | COMTNSMS | 문자메시지 전송 정보를 관리 |
+| 문자메시지수신 | COMTNSMSRECPTN | 문자메시지 수신 정보를 관리 |
+## 환경설정
+### 관련 설정 사항
+- SMEConfig.properties 파일 처리
+
+본 문자메시지서비스를 사용하기 위해서는 "M-Gov 연동 API"에서 제공하는 "SMEConfig.properties" 파일을 지정되어야 한다.
+
+지정해야 할 부분은 **egovframework.com.cop.sms.service.impl.EgovSmsBasicServiceImpl** 부분으로 다음 생성자(public EgovSmsBasicServiceImpl())를 확인한다.
+
+```java
+public class EgovSmsBasicServiceImpl implements EgovSmsInfoService {
+...
+   public EgovSmsBasicServiceImpl() {
+	//--------------------------------
+	// 속성 정보 얻기
+	// M-Gov에서 배포하는 SMEConfig.conf 파일을 절대경로로 지정하면 된다.
+	//--------------------------------
+	//smeConfigPath = EgovProperties.getProperty("Globals.SMEConfigPath");
+
+        // ...
+
+	String globalsPropertiesFile = System.getProperty("user.home")
+		+ System.getProperty("file.separator") + "egovProps"
+		+ System.getProperty("file.separator") + "conf"
+		+ System.getProperty("file.separator") + "SMEConfig.properties";
+
+	smeConfigPath = globalsPropertiesFile;
+
+   }
+...
+```
+
+위 부분에서 globalsPropertiesFile 변수에 SMEConfig.properties 파일에 대한 위치를 지정하여 사용한다.
+- SMEConfig.properties 처리 방식 변경
+
+또는 다음과 같이 직접 smeConfigPath에 SMEConfig.properties 파일 위치를 지정하도록 변경할 수 있다.
+가장 간단하지만.. 향후 해당 파일 위치변경 등의 경우에 소스를 직접 수정해야 되는 문제가 있다.
+
+(프로젝트 공통모듈에 속성에 대한 처리가 있다면.. 프로젝트의 속성처리 공통모듈로 처리되도록 변경할 것을 권장)
+
+```java
+public class EgovSmsBasicServiceImpl implements EgovSmsInfoService {
+...
+   public EgovSmsBasicServiceImpl() {
+	//--------------------------------
+	// 속성 정보 얻기
+	// M-Gov에서 배포하는 SMEConfig.conf 파일을 절대경로로 지정하면 된다.
+	//--------------------------------
+	smeConfigPath = "/product/jeus/egovProps/conf/SMEConfig.properties";
+   }
+...
+```
+
+※ 위의 경우 단순하게 smeConfigPath에 SMEConfig.properties 파일에 대한 절대 경로만 지정하면 됨
+
+
+참고로 SMEConfig.properties는 모바일 전자정부 M-Gov에서 제공하는 파일로 M-Gov 센터 정보 및 계정정보 등을 포함한다.
+### DBMS 정보 변경
+프레임워크의 종속성을 배제하기 위하여 DBMS에 대한 처리도 독립적으로 제공한다.
+현재는 **egovframework.com.cop.sms.impl.SmsBasicDBUtil** 부분에서 DBCP(http://commons.apache.org/dbcp/)를 통한 Connection Pool을 생성하여 처리한다.
+
+관련되어 다음과 같은 DBMS 정보를 변경하면 된다.
+
+(또는 프로젝트에서 DB Connection과 관련된 공통모듈이 있으면.. 해당 모듈로 변경함)
+
+```java
+public class SmsBasicDBUtil {
+...
+    /** Connection Pool Alias */
+    private static final String JDBC_ALIAS = "default";
+    /** JDBC Driver 명 */
+    private static final String JDBC_DRIVER = "org.gjt.mm.mysql.Driver";
+    /** JDBC 접속 URL */
+    private static final String JDBC_URL = "jdbc:mysql://192.168.200.24:1621/com";
+    /** JDBC 접속 사용자ID */
+    private static final String JDBC_USER = "user";
+    /** JDBC 접속 패스워드 */
+    private static final String JDBC_PASSWORD = "password";
+    /** 한번에 pool에서 갖다 쓸 수 있는 최대 커넥션 개수 */
+    private static final int MAX_ACTIVE = 20;
+    /** 사용되지 않고 pool에 저정될 수 있는 최대 커넥션 개수 */
+    private static final int MAX_IDLE = 5;
+    /** 커넥션 timeout */
+    private static final int MAX_WAIT = 20000;
+    /** auto commit 여부 */
+    private static final boolean DEFAULT_AUTOCOMMIT = true;
+    /** read only 여부 */
+    private static final boolean DEFAULT_READONLY = false;
+
+...
+```
+
+위 부분의 기존 DBMS 설정에 맞게 수정하여 사용한다.
+
+추가적으로 **egovframework.com.cop.sms.service.impl.SmsBasicDAO**에서는 DBMS에 대한 query가 지정되어 있는데..
+
+현재는 mySql 기준으로 제공되고 있다.
+
+이 부분도 Oracle인 경우 "for Oracle"로 주석처리된 부분을 사용하면 된다. (altibase, cubrid, tibero는 oracle과 동일)
+
+```java
+public String insertSmsInf(Sms sms) throws Exception {
+	String smsId = null;
+
+	//variables
+        Connection conn = null;
+	PreparedStatement pstmt = null;
+
+	StringBuffer buffer = new StringBuffer();
+
+	try {
+	    // for mySql
+	    buffer.append("INSERT INTO COMTNSMS\n");
+	    buffer.append("  (SMS_ID, TRNSMIT_TELNO, TRNSMIT_CN,\n");
+	    buffer.append("   FRST_REGISTER_ID, FRST_REGISTER_PNTTM )\n");
+	    buffer.append("VALUES\n");
+	    buffer.append("(?, ?, ?, ?, SYSDATE())");
+
+
+	    // for Oracle
+	    /*
+	    buffer.append("INSERT INTO COMTNSMS\n");
+	    buffer.append("  (SMS_ID, TRNSMIT_TELNO, TRNSMIT_CN,\n");
+	    buffer.append("   FRST_REGISTER_ID, FRST_REGISTER_PNTTM )\n");
+	    buffer.append("VALUES\n");
+	    buffer.append("(?, ?, ?, ?, SYSDATE)");
+	    */
+
+	    conn = SmsBasicDBUtil.getConnection();
+
+	    conn.setAutoCommit(false);
+
+	    smsId = getNextId(conn);	// SMS_ID 생성...
+
+	    pstmt = conn.prepareStatement(buffer.toString());
+
+	    int index = 0;
+
+	    pstmt.setString(++index, smsId);
+	    pstmt.setString(++index, sms.getTrnsmitTelno());
+	    pstmt.setString(++index, sms.getTrnsmitCn());
+	    pstmt.setString(++index, sms.getFrstRegisterId());
+
+	    pstmt.executeUpdate();
+
+	    conn.commit();
+
+	    return smsId;
+	} catch (Exception ex) {
+	    if (conn != null) {
+		conn.rollback();
+	    }
+	    throw ex;
+
+	} finally {
+	    SmsBasicDBUtil.close(null, pstmt, conn);
+	}
+    }
+```
+### 전송결과 수신 daemon 실행
+전송에 대한 결과는 별도의 프로그램을 통해 반영된다. (M-Gov 제공 API가 비동기식으로 수신을 별도로 처리하도록 되어 있음)
+
+실행대상은 **egovframework.com.cop.sms.service.impl.EgovSmsBasicReceiver**으로 다음과 같이 실행시킨다.
+
+
+```
+java [JVM Options] egovframework.com.cop.sms.service.impl.EgovSmsBasicReceiver /home/egovframe/conf/SMEConfig.conf
+```
+
+JVM Options는 classpath 등이 지정되어야 하고 뒤 파라미터 부분은 SMEConfig.properties(또는 SMEConfig.conf)의 절대경로를 지정하여 실행한다.
+
+Unix의 경우는 "&" 뒤 부분에 추가하므로써 백그라운드로 실행할 수 있다.
+## 사용방법
+### 문자메시지 전송
+문자메시지 전송은 다음 인테페이스 메소드를 호출한다.
+
+(Implement 객체는 EgovSmsBasicServiceImpl를 사용)
+
+| Interface | return | method | parameters | 비고 |
+| --- | --- | --- | --- | --- |
+| EgovSmsInfoService | void | insertSmsInf | Sms |  |
+- 사용 예
+
+```java
+EgovSmsInfoService service = new EgovSmsBasicServiceImpl();
+	...
+	Sms sms = new Sms();
+
+	sms.setTrnsmitTelno("010-1234-5678");
+	sms.setTrnsmitCn("전송내용");
+	sms.setFrstRegisterId("USRCNFRM_00000000001");
+	sms.setRecptnTelno(
+	  new String[] {
+	    "010-1234-1234",
+	    "010-1234-1235"
+	  }
+	);
+
+	service.insertSmsInf(sms);
+	...
+```
+
+recptnTelno는 String[]로 동시에 여러 명에게 같은 내용을 전송할 수 있다.
+
+----
+### 문자메시지 목록조회
+문자메시지 목록조회는 다음 인테페이스 메소드를 호출한다.
+
+(Implement 객체는 EgovSmsBasicServiceImpl를 사용)
+
+| Interface | return | method | parameters | 비고 |
+| --- | --- | --- | --- | --- |
+| EgovSmsInfoService | Map<String, Object> | selectSmsInfs | SmsVO |  |
+- 사용 예
+
+```java
+EgovSmsInfoService service = new EgovSmsBasicServiceImpl();
+	...
+	searchVO.setUniqId("USRCNFRM_00000000001");
+
+	searchVO.setRecordCountPerPage(10);	// 페이지당 레코드 개수
+	searchVO.setFirstIndex(0);		// 페이징 시작 ROW 지정
+
+	// 현재 페이지 번호에 따른 계산 방법
+	// currentPageNo = 현재 페이지 번호 (1부터 시작)
+	// recordCountPerPage = 한 페이지당 레코드 건수
+	// firstRecordIndex = (currentPageNo - 1) * recordCountPerPage
+
+	Map<String, Object> map = service.selectSmsInfs(searchVO);
+
+	System.out.println("List action is successed...");
+	System.out.println("Total result list count : " + (String)map.get("resultCnt"));
+	System.out.println("List count : " +  ((List<SmsVO>)map.get("resultList")).size());
+	...
+```
+
+추가적인 조건으로 "수신전화번호", "전송내용"을 사용할 수 있다.
+- 수신전화번호 지정
+```java
+searchVO.setSearchCnd(0);
+	searchVO.setSearchWrd("1234");
+```
+- 전송내용 지정
+```java
+searchVO.setSearchCnd(1);
+	searchVO.setSearchWrd("확인");
+```
+
+----
+### 문자메시지 상세조회
+문자메시지 상세조회는 다음 인테페이스 메소드를 호출한다.
+
+(Implement 객체는 EgovSmsBasicServiceImpl를 사용)
+
+| Interface | return | method | parameters | 비고 |
+| --- | --- | --- | --- | --- |
+| EgovSmsInfoService | SmsVO | selectSmsInf | SmsVO |  |
+- 사용 예
+
+```java
+SmsVO vo = new SmsVO();
+
+	vo.setSmsId("SMSID_00000000000001");
+
+	SmsVO detail = service.selectSmsInf(vo);
+
+	System.out.println("Detail action is successed...");
+	System.out.println("Transmit tel. : " + detail.getTrnsmitTelno());
+	System.out.println("Transmit contents : " + detail.getTrnsmitCn());
+	System.out.println("First Reg. ID : " + detail.getFrstRegisterId());
+	System.out.println("First Reg. Name : " + detail.getFrstRegisterNm());
+	System.out.println("First Reg. Time : " + detail.getFrstRegisterPnttm());
+	System.out.println("Receive : ");
+	List<SmsRecptn> list = detail.getRecptn();
+	for (SmsRecptn recptn : list) {
+	    System.out.println("\tTel. : " + recptn.getRecptnTelno());
+	    System.out.println("\tResult Code : " + recptn.getResultCode());
+	    System.out.println("\tResult msg. : " + recptn.getResultMssage());
+	}
+	...
+```
+
+수신전화번호에 대한 내용은 List<SmsRecptn>으로 얻어 위에서 처럼 처리된다.
+## 참고자료
+- 배포 및 테스트 관련 : Common Component System 및 배포 패키지 구성안

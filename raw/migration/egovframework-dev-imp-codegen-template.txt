@@ -1,0 +1,36 @@
+# id: egovframework-dev-imp-codegen-template
+# title: 템플릿 기반 Code Gen.
+# category: development
+# source_url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Adev%3Aimp%3Acodegen%3Atemplate
+# collected_by: collect_egov_wiki.py
+
+====== Template 기반 Code Gen. ======
+===== 개요 =====
+미리 정의된 템플릿을 사용하여 eGovFramework 기반 CRUD 프로그램을 생성하거나 필요한 Configuration/Property 파일을 쉽게 작성할 수 있는 기능이다. \\
+eGovFramework 의 개발환경의 구현도구에서는 다음과 같은 Template 기반 Code Generation 기능을 제공한다.  	
+=====  설명 ===== 
+
+
+ **CRUD 프로그램 자동 생성 기능**\\ 
+ 데이터베이스 테이블을 참조하여 실행 가능한 CRUD Java Code 및  Jsp, SqlMapConfig 파일, SqlMap 파일 자동 생성.
+
+ **Configuration 자동 생성 기능**\\ 
+전자정부 eGovFramework Framework 실행환경의 Configuration/Property 파일 작성 기능
+
+  *  Data Source \\
+  *  Transaction \\
+  *  Cache\\
+  *  Id Generation\\
+  *  Logging\\
+  *  Property\\
+  *  Scheduling\\
+
+ **사용자 정의 템플릿 추가 기능** \\
+프로젝트 환경 및 사용자 환경에 필요한 Configuration 파일을 사용자가 직접 작성하여 구현도구 내 추가하는 기능
+
+=====  사용법   ===== 
+
+    * [[egovframework:dev:imp:codegen:template:crud|CRUD 프로그램 자동 생성 기능]] 
+    * [[egovframework:dev:imp:codegen:template:config|Configuration 자동 생성 기능]]
+    * [[egovframework:dev:imp:codegen:template:custom|사용자 정의 템플릿 추가 기능]] 
+

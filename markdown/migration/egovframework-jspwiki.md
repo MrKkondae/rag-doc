@@ -1,0 +1,65 @@
+---
+id: "egovframework-jspwiki"
+title: "JSPWiki설치"
+version: "4.3"
+category: "common"
+source: "eGovFrame Wiki"
+source_url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Ajspwiki%EC%84%A4%EC%B9%98"
+format: "markdown"
+---
+
+# 사용자지원 - JSPWiki 설치
+## 다운로드
+아래 JSPWIKI 사이트에 접속하여 JSPWiki X.X.X 버전(최신버전)을 다운로드한다.
+http://www.apache.org/dist/jspwiki/
+## UNIX 계열 설치
+1. 다운로드한 JSPWiki.war 배포 파일을 해당 WAS에 설치한다.
+
+2. WEB-INF\jspwiki.properties 변경(http://common.egovframe.go.kr/JSPWiki/Install.jsp에서 수정할 수 있음)
+	자신의 환경에 맞게 수정해야 할 속성
+	jspwiki.applicationName = JSPWiki
+	jspwiki.baseURL=http://common.egovframe.go.kr/JSPWiki/
+	jspwiki.fileSystemProvider.pageDir = /product/jeus2/jspwiki/
+	jspwiki.basicAttachmentProvider.storageDir = /product/jeus2/jspwiki/
+	log4j.appender.FileLog.File = /product/jeus2/tmp/jspwiki.log
+	jspwiki.workDir = /product/jeus2/tmp/
+
+[이미지]
+
+3. 접속 URL
+	http://common.egovframe.go.kr/JSPWiki
+## TOMCAT/WINDOWS 설치
+아래 사이트 에 접속하여 톰캣 최신버전을 다운 받는다.
+http://tomcat.apache.org/download-70.cgi
+1. 다운받은 톰캣을 우선 설치한다.
+2. 다운받은 JSPWIKI를 앞축을 해제 한다.
+3. 설치된 톰캣 C:\Program Files\Apache Software Foundation\Tomcat X.X\webapps\ 폴더에 JSPWiki.war복자
+4. WEB-INF\jspwiki.properties 변경 또는 설치 페이지(Install.jsp)에서 다음을 입력한다.
+
+```
+jspwiki.applicationName = JSPWiki
+  jspwiki.baseURL==http://127.0.0.1:8080/JSPWiki/
+  jspwiki.fileSystemProvider.pageDir =  C: jspwiki pages
+  jspwiki.basicAttachmentProvider.storageDir = C: jspwiki data
+  log4j.appender.FileLog.File = C: jspwiki log jspwiki.log
+  jspwiki.workDir = C: jspwiki tmp
+```
+
+5. C:\에 위키 관련 파일을 보관하기 위한 jspwiki 디렉토리를 생성함
+6. C:\Program Files\Apache Software Foundation\Tomcat 6.0\conf\server.xml 파일수정
+## 수정내역
+```
+<Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+			▼
+    <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" URIEncoding="UTF-8"/>
+```
+
+7. 톰캣 시작
+C:\Program Files\Apache Software Foundation\Tomcat X.0\bin\startup.bat
+
+8. 테스트 URL
+http://127.0.0.1:8080/JSPWiki

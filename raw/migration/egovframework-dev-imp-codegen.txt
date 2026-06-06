@@ -1,0 +1,90 @@
+# id: egovframework-dev-imp-codegen
+# title: Code Generation
+# category: development
+# source_url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Adev%3Aimp%3Acodegen
+# collected_by: collect_egov_wiki.py
+
+====== Code Generation ======
+
+===== 개요 =====
+ 
+eGovFramework 의 개발환경 구현도구에서는 다음과 같은 Code Generation 기능을 제공한다. 
+
+
+== Template 기반 Code Gen. ==
+미리 정의된 템플릿을 사용하여 eGovFramework을 기반으로 하는CRUD 프로그램을 생성하거나 필요한 Configuration/Property 파일을 쉽게 작성할 수 있다. 
+
+== Model 기반 Code Gen.==
+클래스 다이어그램에서 정의한 모델을 통해 eGovFramework에 기반한 자바 코드를 자동생성한다. 
+
+===== 설명 =====
+
+eGovFramework 구현도구의 Code Generation 기능은 다음과 같은 편의성을 제공한다.
+
+|설계자|응용 프로그램 설계 모형 집중과 Prototype을 통해 위험 예방 가능 |
+|개발자|Source Code 개발 집중과 빠른 테스트 수행 가능 |
+|유지보수자|표준 템플릿 형태로 높은 이해 제공, 신뢰성 높은 유지보수 가능 |
+
+
+===== 사용법 =====
+
+  * [[egovframework:dev:imp:codegen:template|Template 기반 Code Gen.]] 
+    * [[egovframework:dev:imp:codegen:template:crud|CRUD 프로그램 자동 생성 기능]] 
+    * [[egovframework:dev:imp:codegen:template:config|Configuration 자동 생성 기능]]
+    * [[egovframework:dev:imp:codegen:template:custom|사용자 정의 템플릿 추가 기능]] 
+
+
+  * [[egovframework:dev:imp:codegen:model|Model 기반 Code Gen.]] 
+    * [[egovframework:dev:imp:codegen:model:uml_codegen|구현도구의 UML 클래스 다이어그램을 사용한 코드 자동 생성]] 
+    * [[egovframework:dev:imp:codegen:model:xmi_codegen|XMI 파일을 이용한 코드 자동 생성]]
+    * [[egovframework:dev:imp:codegen:model:xmi_export|구현도구의 UML 클래스 다이어그램을 XMI 파일로 Export하는 기능]] 
+
+===== 업데이트 =====
+
+사용자가 Code Generation을 사용하기 위해서는 eGovFramework 구현도구를 포털에서 다운 받거나 구현도구를 업데이트해야 한다. \\
+구현도구를 새로 다운 받는 것을 권장하며 업데이트하는 방법은 다음과 같다. 
+
+  - 사용자의 eclipse 개발환경에서 메뉴 > Help > Software Updates 를 클릭한다. (<그림 1> 참조)
+  - "Software Updates and Add-ons" 다이얼로그 창에서 Available Software 탭을 클릭한다. 
+  - "Available Software" 목록 우측에 있는 "Add Site..." 버튼을 클릭한다. (<그림 2> 참조)
+  - "Add Site" 다이얼로그 창에 있는 Location 입력 항목에 "https://www.egovframe.go.kr/update" 를 입력하고 "OK" 버튼을 클릭한다. (<그림 3> 참조)
+  - "Available Software" 목록에 입력한 Url 이 추가된다. 
+  - 입력한 Url 의 하위 트리 항목을 확장하여 eGovFramework Development Environment의  "eGovFramework Code Gen Feature", "eGovFramework Code Gen Templates Feature"를 설치한 뒤, "eGovFramework IDE Feature"를 추가로 설치한다.
+  - "Available Software" 목록 우측에 있는 "Install..." 버튼을 클릭한다. (<그림 4> 참조)
+
+{{:egovframework:dev:imp:editor:dbio_editor:sqlmapconfig2-1.jpg|Software Updates  }}
+\\ <그림 1> Software Updates  
+
+{{:egovframework:dev:imp:editor:dbio_editor:sqlmapconfig2-2.jpg|"Available Software" 목록 }}
+\\   <그림 2> "Available Software" 목록  
+
+{{:egovframework:dev:imp:editor:add_update_site.png|Location 입력}}
+\\  <그림 3> Location 입력  
+
+{{:egovframework:dev:imp:codegen:plugin_update_codegen_3.png|Install }}
+\\  <그림 4> Install 
+
+===== 업데이트 주의사항 =====
+
+  * 기존 개발환경에 Code Generation 기능을 업데이트하여 사용하기 위해서는 인코딩을 UTF-8로 설정해야한다. 개발환경 실행 폴더에 있는 eclipse.ini 파일에 다음과 같이 Encoding 설정 옵션을 추가해야 한다.
+
+''-Dfile.encoding=UTF-8''
+
+  * Model Based Code Generation 기능은 기본적으로 Eclipse UML 2.0 라이브러리를 사용한다. eGovFrame CodeGen 플러그인을 업데이트한 후 IDE 를 업데이트하면 자동으로 해당 라이브러리를 업데이트받게 된다. IDE Update 를 추가적으로 수행한 후에도 메뉴가 보이지 않는 등 이상 동작을 보이면 Eclipse UML 2.0 이 제대로 설치되었는지 확인해야 한다. 다음은 Eclipse UML 2.0 설치 확인 방법이다.
+
+{{:egovframework:dev:imp:codegen:plugin_update_codegen_11.png| About Eclipse Platform}}
+\\  <그림 5> 메뉴 > Help > About Eclipse Platform
+
+{{:egovframework:dev:imp:codegen:plugin_update_codegen_12.png|Plug-in Detail }}
+\\  <그림 6> Plug-in Detail 버튼 클릭 
+
+{{:egovframework:dev:imp:codegen:plugin_update_codegen_13.png|Eclipse UML 2.0 설치 확인 }}
+\\  <그림 7> 플러그인 목록에서 Eclipse UML 2.0 설치 확인 
+
+  *  위에서 Eclipse UML 2.0 설치가 안되어 있는 경우 다음 플러그인을 수동으로 업데이트받기 바람. \\
+
+    Ganymede Update Site > Models and Model Development > UML 2 End-User Features 
+    Ganymede Update Site > Models and Model Development > UML 2 Extender SDK 
+
+
+

@@ -1,4 +1,144 @@
 documents:
+- id: egovframework-let4-0-configration
+  title: 경량환경 구성 및 환경설정
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Alet4.0%3Aconfigration
+  page_id: egovframework:let4.0:configration
+- id: egovframework-rte2-brte-batch-core-batch-runner
+  title: JobRunner
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Abatch_runner
+  page_id: egovframework:rte2:brte:batch_core:batch_runner
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-code-base-exception
+  title: Code Base Exception
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Acode_base_exception
+  page_id: egovframework:rte2:brte:batch_core:code_base_exception
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-history-management
+  title: History Management
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Ahistory_management
+  page_id: egovframework:rte2:brte:batch_core:history_management
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-item-reader-v3-7
+  title: ItemReader
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Aitem_reader_v3.7
+  page_id: egovframework:rte2:brte:batch_core:item_reader_v3.7
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-item-writer-v3-7
+  title: ItemWriter
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Aitem_writer_v3.7
+  page_id: egovframework:rte2:brte:batch_core:item_writer_v3.7
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-job-launcher
+  title: JobLauncher
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Ajob_launcher
+  page_id: egovframework:rte2:brte:batch_core:job_launcher
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-job-repository
+  title: JobRepository
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Ajob_repository
+  page_id: egovframework:rte2:brte:batch_core:job_repository
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-job-v3-7
+  title: Job Execution
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Ajob_v3.7
+  page_id: egovframework:rte2:brte:batch_core:job_v3.7
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-listener
+  title: Pre / Post Processing
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Alistener
+  page_id: egovframework:rte2:brte:batch_core:listener
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-multidata-process
+  title: MultiData Processing
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Amultidata_process
+  page_id: egovframework:rte2:brte:batch_core:multidata_process
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-parallel-process
+  title: Parallel Processing
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Aparallel_process
+  page_id: egovframework:rte2:brte:batch_core:parallel_process
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-resource-variable
+  title: Resource Variable
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Aresource_variable
+  page_id: egovframework:rte2:brte:batch_core:resource_variable
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-skip-repeat-retry
+  title: Skip/Retry/Repeat
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Askip_repeat_retry
+  page_id: egovframework:rte2:brte:batch_core:skip_repeat_retry
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-step
+  title: Tasklet
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Astep
+  page_id: egovframework:rte2:brte:batch_core:step
+  tags:
+  - legacy
+  - rte2
+  - batch
+- id: egovframework-rte2-brte-batch-core-step-v3-7
+  title: Step Execution
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Astep_v3.7
+  page_id: egovframework:rte2:brte:batch_core:step_v3.7
+  tags:
+  - legacy
+  - rte2
+  - batch
 - id: egovframework-rte3-5-psl-data-mongodb-repositories
   title: MongoDB Repositories
   category: rte43
@@ -119,6 +259,11 @@ documents:
   category: rte43
   url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Apsl%3Adataaccess%3Aspring_ibatis_integration
   page_id: egovframework:rte3:psl:dataaccess:spring_ibatis_integration
+- id: egovframework-rte4-0-fdl-server-security-xmlschema
+  title: 시큐리티 간소화
+  category: rte43
+  url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.0%3Afdl%3Aserver_security%3Axmlschema
+  page_id: egovframework:rte4.0:fdl:server_security:xmlschema
 - id: egovframework-rte4-3
   title: 전자정부프레임워크 실행환경 4.3
   category: rte43
@@ -394,30 +539,3 @@ documents:
   category: rte43
   url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Aptl%3Aweb_servlet
   page_id: egovframework:rte4.3:ptl:web_servlet
-- id: egov43-batch-core-job-configuration
-  title: Batch Core - Job Configuration
-  category: rte43
-  url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte4.3:brte:batch_core:job_configuration"
-  tags:
-    - batch
-    - spring-batch
-    - job
-    - jobrepository
-    - joblauncher
-    - jobexecution
-    - jobinstance
-    - rte43
-    - id: egov43-batch-core-job-execution
-  title: Batch Core - Job Execution
-  category: rte43
-  url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte4.3:brte:batch_core:job_execution"
-  tags:
-    - batch
-    - spring-batch
-    - job
-    - jobrepository
-    - joblauncher
-    - jobexecution
-    - jobinstance
-    - stepexecution
-    - rte43

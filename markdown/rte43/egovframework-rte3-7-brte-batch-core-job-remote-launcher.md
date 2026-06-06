@@ -125,27 +125,6 @@ Remote 배치 서비스를 호출하기 위하여 스프링의 HessianProxyFacto
 ```
 ** Step 2 ** 테스트 파일을 작성하여 등록된 웹서비스를 호출한다.
 아래와 같이 테스트 파일을 작성하여 웹서비스를 호출하며 템플릿 예제의 "delimitedToDelimitedJob" 배치 job을 실행하여 결과로 Job Instance 및 step Info를 출력한다.
-
-#### JobParameters 배치 실행 파라미터
-
-JobParameters는 Spring Batch에서 Job 실행 시 전달되는 실행 파라미터이다.
-Remote JobLauncher를 통해 배치를 실행하는 경우에도 Job 이름과 함께 입력 파일, 출력 파일, 실행 시각, 기준일자 등의 파라미터가 JobParameters로 구성되어 JobInstance에 저장된다.
-
-JobParameters는 동일 Job의 실행 인스턴스를 식별하는 기준으로 사용되며,
-동일한 Job 이름과 동일한 JobParameters 조합으로 이미 완료된 JobInstance가 존재하는 경우 재실행이 제한될 수 있다.
-따라서 반복 실행이 필요한 배치에서는 timestamp, run.id, 처리일자, 파일명 등 실행마다 구분 가능한 값을 JobParameters에 포함하는 것이 일반적이다.
-
-일반적인 Spring Batch 실행에서는 JobParametersBuilder를 사용하여 addString, addLong, addDate, addDouble 방식으로 JobParameters를 생성할 수 있다.
-
-본 예제의 출력 결과 중 parameters 항목은 해당 JobInstance에 전달된 JobParameters를 의미한다.
-
-```text
-parameters = {
-  inputFile=classpath:/egovframework/batch/data/inputs/csvData.csv,
-  outputFile=file:xxxxx/remote-batch-output/csvOutput_xxxx.csv,
-  timestamp=xxxxxxxxxxx
-}
-```
 ```java
 package egovtest.webBatchRemote;
 
@@ -214,7 +193,6 @@ commitCount = 3
 rollbackCount = 0
 exitStatus = COMPLETED
 ```
-
 ## 참고자료
     *[스프링의 Hessian Remotely call servcies](https://docs.spring.io/spring/docs/3.0.0.M4/reference/html/ch19s03.html)
     *[ Hessian Binary Web Service Protocol](http://hessian.caucho.com/ )

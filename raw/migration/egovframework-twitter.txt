@@ -1,0 +1,60 @@
+# id: egovframework-twitter
+# title: Twitter인증키관리
+# category: common
+# source_url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Atwitter%EC%9D%B8%EC%A6%9D%ED%82%A4%EA%B4%80%EB%A6%AC
+# collected_by: collect_egov_wiki.py
+
+====== 사용자지원 - Twitter인증키관리 ======
+===== 개요 =====
+
+**트위터(Twitter)**는  쇼셜 네트워크 서비스(Social Network Service:SNS)하기 위한 Twitter를 연동을 하기 위한 트위터 인증키를 관리하는 기능을 제공한다.
+
+트위터 인증키 관리 ConsumerKey, ConsumerSecret Key 입력은 트위터에서 선정한 OAuth  http://dev.twitter.com/pages/auth 인증 방식에 따른 키를 저장한다.
+
+===== 설명 =====
+
+  * **트위터(Twitter)**는 트위터와 연동하기 위한 목적으로 계정관리의 기능을 수반한다.
+
+    ① 트위터 인증키 관리 : 등록된 트위터 인증키 정보를 변경한다.
+
+=== 관련소스 ===
+
+^유형^대상소스명^비고^
+|Controller|egovframework.com.uss.ion.tir.web.EgovTwitterController.java|트위터 관리를 위한 컨트롤러 클래스|
+|Service|egovframework.com.uss.ion.tir.service.EgovTwitterRecptnService.java|트위터 관리를 위한  서비스 인터페이스|
+|Service|egovframework.com.uss.ion.tir.service.EgovTwitterTrnsmitService.java|트위터 관리를 위한  서비스 인터페이스|
+|ServiceImpl|egovframework.com.uss.ion.tir.service.impl.EgovTwitterRecptnServiceImpl.java|트위터 관리를 위한 서비스 구현 클래스|
+|ServiceImpl|egovframework.com.uss.ion.tir.service.impl.EgovTwitterTrnsmitServiceImpl.java|트위터 관리를 위한 서비스 구현 클래스|
+|DAO|egovframework.com.uss.ion.tir.service.impl.RssTagManageDao.java|트위터 관리를 위한 데이터처리 클래스||
+|Model|egovframework.com.uss.ion.tir.service.TwitterInfo.java|트위터 관리를 위한 Model 클래스|
+|JSP|/WEB-INF/jsp/egovframework/uss/ion/tir/EgovTwitterMain.jsp|트위터 메인 jsp페이지|
+|JSP|/WEB-INF/jsp/egovframework/uss/ion/tir/EgovTwitterPopup.jsp|트위터 Consumer key/Consumer secret 인증을 위한 jsp페이지|
+|JSP|/WEB-INF/jsp/egovframework/uss/ion/tir/EgovTwitterPopupActor.jsp|트위터 Consumer key/Consumer secret 인증 처리를 위한 jsp페이지|
+|JSP|/WEB-INF/jsp/egovframework/uss/ion/tir/EgovTwitterPopupProcess.jsp|Twitter.com에 인증후 Return 받는 jsp페이지|
+|JSP|/WEB-INF/jsp/egovframework/uss/ion/tir/EgovTwitterTrnsmit.jsp|트위터 송신(등록)을  위한 jsp페이지|
+|JSP|/WEB-INF/jsp/egovframework/uss/ion/tir/EgovTwitterTrnsmitResult.jsp|트위터 송신(등록)후 결과 확인을 위한 jsp페이지|
+|JSP|/WEB-INF/jsp/egovframework/uss/ion/tir/EgovTwitterRecptn.jsp|트위터 목록조회를 위한 jsp페이지|
+|JSP|/WEB-INF/jsp/egovframework/uss/ion/tir/EgovTwitterAccount.jsp|트위터 계정정보를 변경하기  위한 jsp페이지|
+|XML|/egovframework/sqlmap/com/uss/ion/tir/EgovTwitter_SQL_*.xml|RSS관리관리 QUERY XML|
+
+=== 클래스 다이어그램 ===
+
+{{:egovframework:com:uss:ion:tir:트위터_수신_목록_인증키입력_new.jpg|}}
+
+=== 관련테이블 ===
+
+^테이블명^테이블명(영문)^비고^
+|트위터계정관리|COMTNTWITTER|트위터계정을 관리하기 위한 속성정보를 정의하고, 관리한다.|
+
+===== 관련화면 및 수행메뉴얼 =====
+
+=== 트위터 인증키 관리 ===
+
+트위터 인증키를 자동으로 관리 할수 있는 화면을 제공한다.
+
+{{:egovframework:com:uss:ion:tir:트위터인증키관리.jpg|}}
+
+저장 : 작성 혹은 수정된 트위터 인증키 저장을 요청한다.
+
+----
+

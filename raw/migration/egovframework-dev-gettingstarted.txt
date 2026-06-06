@@ -1,0 +1,20 @@
+# id: egovframework-dev-gettingstarted
+# title: GettingStarted
+# category: development
+# source_url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Adev%3Agettingstarted
+# collected_by: collect_egov_wiki.py
+
+===== Getting Started =====
+  * [[https://www.egovframe.go.kr/docs/5.0/getting-started/|전자정부 표준 프레임워크 5.0 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev4.3:gettingstarted|전자정부 표준 프레임워크 4.3 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev4.2:gettingstarted|전자정부 표준 프레임워크 4.2 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev4.1:gettingstarted|전자정부 표준 프레임워크 4.1 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev4.0:gettingstarted|전자정부 표준 프레임워크 4.0 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev3.10:gettingstarted|전자정부 표준 프레임워크 3.10 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev3.9:gettingstarted|전자정부 표준 프레임워크 3.9 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev3.8:gettingstarted|전자정부 표준 프레임워크 3.8 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev3.7:gettingstarted|전자정부 표준 프레임워크 3.7 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev3.6:gettingstarted|전자정부 표준 프레임워크 3.6 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev3.5:gettingstarted|전자정부 표준 프레임워크 3.5 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev3.0:gettingstarted|전자정부 표준 프레임워크 3.0 기반 개발 시작하기(Getting Started)]]
+  * [[egovframework:dev2.7:gettingstarted|전자정부 표준 프레임워크 2.7 기반 개발 시작하기(Getting Started)]]

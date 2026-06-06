@@ -1,0 +1,64 @@
+---
+id: "egovframework-wiki"
+title: "Wiki북마크관리"
+version: "4.3"
+category: "common"
+source: "eGovFrame Wiki"
+source_url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Awiki%EB%B6%81%EB%A7%88%ED%81%AC%EA%B4%80%EB%A6%AC"
+format: "markdown"
+---
+
+# 사용자지원 - Wiki북마크관리
+## 개요
+**Wiki북마크관리**는 사용자가 자주 사용하는 Wiki를 북마크를 관리 하는 기능을 제공한다.
+## 설명
+- **Wiki북마크**는 등록한 Wiki 북마크 정보를 조회, 삭제, 등록 하는 기능을 제공한다.
+
+    ① Wiki북마크 관리: Wiki북마크 정보를 최근 등록 순서대로 조회 및 삭제 하고, 그 결과 목록을 화면에 반영한다.
+    ② Wiki북마크 등록: Wiki서비스에서 넘어온 Wiki북마크 정보를 등록 처리 한다.
+#### 관련소스
+| 유형 | 대상소스명 | 비고 |
+| --- | --- | --- |
+| Controller | egovframework.com.uss.ion.wik.bmk.web.EgovWikiBookmarkController.java | Wiki북마크를 위한 컨트롤러 클래스 |
+| Service | egovframework.com.uss.ion.wik.bmk.service.EgovWikiBookmarkService.java | Wiki북마크를 위한  서비스 인터페이스 |
+| ServiceImpl | egovframework.com.uss.ion.wik.bmk.service.impl.EgovWikiBookmarkServiceImpl.java | Wiki북마크를 위한 서비스 구현 클래스 |
+| DAO | egovframework.com.uss.ion.wik.bmk.service.impl.WikiBookmarkDao.java | Wiki북마크를 위한 데이터처리 클래스 |
+| Model | egovframework.com.uss.ion.wik.bmk.service.WikiBookmark.java | Wiki북마크를 위한 Model 클래스 |
+| JSP | /WEB-INF/jsp/egovframework/uss/ion/wik/bmk/EgovWikiBookmarkList.jsp | Wiki북마크 목록조회를 위한 jsp페이지 |
+| JSP | /WEB-INF/jsp/egovframework/uss/ion/wik/bmk/EgovWikiBookmarkRegist.jsp | Wiki북마크 등록 메세지 출력을 위한 jsp페이지 |
+| XML | /egovframework/sqlmap/com/uss/ion/wik/bmk/EgovWikiBookmark_SQL_*.xml | Wiki북마크 QUERY XML |
+#### 클래스 다이어그램
+[이미지]
+#### 관련테이블
+| 테이블명 | 테이블명(영문) | 비고 |
+| --- | --- | --- |
+| Wiki북마크 | COMTNWIKIBKMK | Wiki북마크를 관리하기 위한 속성정보를 정의하고, 관리한다. |
+#### ID Generation
+- ID Generation Service를 활용하기 위해서 Sequence 저장테이블인  COMTECOPSEQ에 **WIKI_ID** 항목을 추가한다.
+
+```sql
+INSERT INTO COMTECOPSEQ VALUES('WIKI_ID',0);
+```
+## 관련화면 및 수행메뉴얼
+#### Wiki북마크관리
+| Action | URL | Controller method | QueryID |
+| --- | --- | --- | --- |
+| 목록조회 | /uss/ion/wik/bmk/listWikiBookmark.do | EgovWikiBookmarkList | WikiBookmark.selectWikiBookmarkList |
+|  |  |  | WikiBookmark.selectWikiBookmarkListCnt |
+|  |  |  | WikiBookmark.deleteWikiBookmark |
+
+[이미지]
+
+조회 : 북마크명으로 조회를 요청한다.
+삭제 : 선택된 Wiki북마크 정보를 삭제한다.
+목록 북마크명 클릭 :  **JSPWiki**에 북마크된 화면으로 이동한다.
+----
+#### Wiki북마크 등록
+| Action | URL | Controller method | QueryID |
+| --- | --- | --- | --- |
+| 등록 | /uss/ion/wik/bmk/registWikiBookmark.do | EgovWikiBookmarkRegist | WikiBookmark.insertWikiBookmark |
+|  |  |  | WikiBookmark.selectWikiBookmarkEmpUniqId |
+
+화면없음 - Wiki서비스에서 넘어온 Wiki북마크(사용자ID,Wiki북마크명)정보를 등록 처리한다.
+
+----

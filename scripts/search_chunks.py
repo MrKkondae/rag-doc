@@ -118,6 +118,8 @@ def keyword_boost(query: str, chunk: dict) -> float:
         if "pom.xml" in content:
             boost += 0.02
 
+        boost += concept_heading_boost(query, chunk)
+
     return boost
 
 
@@ -135,6 +137,14 @@ def cosine_search(
     for idx, vector_score in enumerate(vector_scores):
         chunk = chunks[idx]
         boost = keyword_boost(query, chunk)
+
+        if chunk.get("document_title") == "ItemWriter":
+            print(
+                chunk.get("heading"),
+                vector_score,
+                boost
+            )
+
         final_score = float(vector_score) + boost
 
         results.append((idx, float(vector_score), boost, final_score))
@@ -199,6 +209,27 @@ def search(query: str, embedding_file: Path, top_k: int = TOP_K) -> None:
             f"final_score: {final_score:.4f}"
         )
 
+def normalize_text(text: str) -> str:
+    return text.lower().replace(" ", "").replace("-", "").replace("_", "")
+
+
+def concept_heading_boost(query: str, chunk: dict) -> float:
+    query_norm = normalize_text(query)
+    title_norm = normalize_text(chunk.get("document_title", ""))
+    heading = chunk.get("heading", "").strip().lower()
+
+    boost = 0.0
+
+    # query가 document_title과 정확히 같은 경우 기본 설명/개요 heading 우선
+    if query_norm and query_norm == title_norm:
+        if heading in ["설명", "개요", "소개"]:
+            boost += 0.06
+
+        # 상세 구현체 설명은 약간만 감점
+        if "flatfile" in heading or "dbitemwriter" in heading or "listener" in heading:
+            boost -= 0.02
+
+    return boost
 
 def main() -> None:
     args = parse_args()

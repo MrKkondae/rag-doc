@@ -1,0 +1,162 @@
+---
+id: "egovframework-gpki"
+title: "GPKI 인증서 로그인"
+version: "4.3"
+category: "common"
+source: "eGovFrame Wiki"
+source_url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Agpki_%EC%9D%B8%EC%A6%9D%EC%84%9C_%EB%A1%9C%EA%B7%B8%EC%9D%B8"
+format: "markdown"
+---
+
+# GPKI 인증서 로그인 서비스
+## 개요
+행정전자서명 인증서란 행정전자서명이 진정한 것임을 확인, 증명할 수 있도록 하기 위하여 행정기관, 보조기관, 보좌기관, 공공기관, 은행 또는 사용자에게 발급하는 전자적 정보를 말한다. 전자서명은 인감증명서의 인감도장과 같은 역할을 하는 전자문서의 신뢰성 보증 수단이다. 행정전자서명은 공무원 및 행정업무 처리자를 위한 인증서(GPKI)로서 민간부분을 위한 인증서(NPKI)와 상호 연동을 통해 사용자 서비스를 제공한다.
+- 행정전자서명은 최상위인증기관(RootCA), 인증기관(CA), 등록기관(RA), 원격등록기관(LRA)으로 계층화되어 하위 기관의 권한을 승인하여 관리하는 체계로 구성된다. 효과적인 행정전자서명 인증체계의 유지를 위하여 계층별 역할 구분 및 관리한다.
+- 행정전자서명 인증서는 기관용, 개인용으로 구분하여 발급하며 그 사용목적에 따라 용도별 인증서 발급처리 절차를 따른다.
+##### = 기능흐름
+| 기능명 | 기능 흐름 |
+| --- | --- |
+| 인증서 로그인 | 인증서 선택 -> 비밀번호 입력 -> 인증기관 요청 -> ***권한조회*** -> ***세션설정*** -> ***로그인로그 생성*** -> ***권한별 메뉴설정*** -> 권한별 화면로딩 |
+- 전자정부 표준프레임워크를 사용하지 않는 경우는 요소기술의 인증서로그인을 참조 (프레임워크에 종속되지 않도록 기능이 제공됨)
+## 전제조건
+본 사업에서 제시하는 GPKI 인증 로그인 서비스를 사용하기 위해서는 행정전자서명 인증서를 발급받아야 하며, 이는 행정전자서명 인증관리센터(Government Certification Management Authority)에서 주관하고 있다. 신청 및 발급 절차는 다음과 같다.
+- 발급 절차
+
+[이미지]
+
+① 행정전자서명 신청서를 다운로드 받아 작성한다.
+② 작성한 신청서를 등록기관 또는 원격등록기관에 공문으로 신청한다.
+③ 등록기관 담당자는 가입자 신원확인 절차를 거친다.
+④ 신원확인이 된 가입자에게 발급안내 메일을 전송한다.
+⑤ 사용자 인증서를 발급받는다.
+기타 자세한 정보 확인 및 문의는 행정전자서명 인증관리센터(http://www.gpki.go.kr)를 참고한다.
+## 설명
+GPKI 인증 API는 암호이론을 바탕으로 하는 보안서비스를 포함하거나 제공하는 응용프로그램을 만들기 위한 관리도구이다. 암호에 대한 배경 지식이 많지 않은 개발자도 필요한 보안 사항에 따라 표준보안API 모듈을 사용하면 그에 대한 보안서비스를 제공하는 프로그램을 손쉽게 개발할 수 있다.
+본 기능은 정부인증센터가 구축한 정부공개키기반구조(GPKI:Government Public Key Infrastructure)를 공유하여 행정의 효율성을 제고할 수 있도록 GPKI 인증서 로그인 처리를 담당한다.
+#### 관련소스
+| 유형 | 대상소스명 | 비고 |
+| --- | --- | --- |
+| Controller | egovframework.com.uat.uia.web.EgovLoginController.java | 로그인을 위한 컨트롤러 클래스 |
+| Service | egovframework.com.uat.uia.service.EgovLoginService.java | 로그인을 위한 서비스 인터페이스 |
+| Service | egovframework.com.sym.log.service.EgovLogManageService.java | 로그인 로그생성을 위한 서비스 인터페이스 |
+| Service | egovframework.com.sym.mpm.service.EgovMenuManageService.java | 로그인 후 메뉴조회를 위한 서비스 인터페이스 |
+| ServiceImpl | egovframework.com.uat.uia.service.impl.EgovLoginServiceImpl.java | 로그인을 위한 서비스 구현 클래스 |
+| VO | egovframework.com.uat.uia.service.LoginVO.java | 로그인을 위한 VO 클래스 |
+| DAO | egovframework.com.uat.uia.service.impl.LoginDAO.java | 로그인을 위한 데이터 처리 클래스 |
+| Query XML | resources/egovframework/sqlmap/com/uat/uia/EgovLoginUsr_SQL.xml | 로그인을 위한 Query XML |
+| JSP | WEB_INF/jsp/egovframework/cmm/uat/uia/EgovLoginUsr.jsp | 로그인 페이지 |
+| js | /js/egovframework/cmm/uat/uia/EgovGpkiInstall.js | GPKI SecureWeb 인스톨을 위한 Javascript 파일 |
+| js | /js/egovframework/cmm/uat/uia/EgovGpkiVariables.js | GPKI 인증처리에 필요한 변수를 담은 Javascript 파일 |
+| js | /js/egovframework/cmm/uat/uia/EgovGpkiFunction.js | GPKI 인증처리를 위한 Javascript 파일 |
+#### 클래스 다이어그램
+[이미지]
+#### 관련테이블
+| 테이블명 | 테이블명(영문) | 비고 |
+| --- | --- | --- |
+| 업무사용자 | COMTNEMPLYRINFO | 업무사용자정보를 관리 |
+| 로그인로그 | COMTNLOGINLOG | 로그인로그 정보를 관리 |
+| 메뉴 | COMTNMENUINFO | 메뉴 정보를 관리 |
+#### 관련설정
+GPKI 인증서 로그인 기능을 구현하려고 하는 경우에는 EgovLoginController.java를 다음과 같이 변경한다.
+- 로그인 화면 처리 부분을 다음과 같이 수정한다.
+```java
+public String loginUsrView(@ModelAttribute("loginVO") LoginVO loginVO,
+    HttpServletRequest request,
+    HttpServletResponse response,
+    ModelMap model)
+    throws Exception {
+	// # GPKI 인증을 처리하는 경우
+	GPKIHttpServletResponse gpkiresponse = null;
+	GPKIHttpServletRequest gpkirequest = null;
+
+	try{
+
+		gpkiresponse=new GPKIHttpServletResponse(response);
+		gpkirequest= new GPKIHttpServletRequest(request);
+		gpkiresponse.setRequest(gpkirequest);
+		model.addAttribute("challenge", gpkiresponse.getChallenge());
+		return "cmm/uat/uia/EgovLoginUsr";
+
+	}catch(Exception e){
+		return "cmm/egovError";
+	}
+}
+```
+- 인증서 로그인 처리 부분을 다음과 같이 수정한다.
+```java
+public String actionCrtfctLogin(@ModelAttribute("loginVO") LoginVO loginVO,
+    HttpServletRequest request,
+    HttpServletResponse response,
+    ModelMap model)
+    throws Exception {
+    	// # GPKI 인증을 처리하는 경우
+    	// 접속IP
+    	String userIp = EgovClntInfo.getClntIP(request);
+
+    	// 1. GPKI 인증
+    	GPKIHttpServletResponse gpkiresponse = null;
+	GPKIHttpServletRequest gpkirequest = null;
+	String dn = "";
+	try{
+		gpkiresponse = new GPKIHttpServletResponse(response);
+		gpkirequest = new GPKIHttpServletRequest(request);
+		gpkiresponse.setRequest(gpkirequest);
+		X509Certificate cert = null;
+
+		byte[] signData = null;
+		byte[] privatekey_random = null;
+		String signType = "";
+		String queryString = "";
+
+		cert = gpkirequest.getSignerCert();
+		dn = cert.getSubjectDN();
+
+		java.math.BigInteger b = cert.getSerialNumber();
+		b.toString();
+		int message_type =  gpkirequest.getRequestMessageType();
+		if( message_type == gpkirequest.ENCRYPTED_SIGNDATA ||
+		    message_type == gpkirequest.LOGIN_ENVELOP_SIGN_DATA ||
+		    message_type == gpkirequest.ENVELOP_SIGNDATA ||
+		    message_type == gpkirequest.SIGNED_DATA){
+		    signData = gpkirequest.getSignedData();
+		    if(privatekey_random != null) {
+			privatekey_random   = gpkirequest.getSignerRValue();
+		    }
+		    signType = gpkirequest.getSignType();
+		}
+		queryString = gpkirequest.getQueryString();
+	}catch(Exception e){
+		return "cmm/egovError";
+	}
+
+	// 2. 업무사용자 테이블에서 dn값으로 사용자의 ID, PW를 조회하여
+	// 이를 일반로그인 형태로 인증하도록 함
+	if (dn != null && !dn.equals("")) {
+
+		loginVO.setDn(dn);
+		LoginVO resultVO = loginService.actionCrtfctLogin(loginVO);
+		if (resultVO != null && resultVO.getId() != null &&
+		    !resultVO.getId().equals("")) {
+		    // 3. spring security 연동
+		    return "redirect:/j_spring_security_check?j_username=" +
+		           resultVO.getUserSe() + resultVO.getId() +
+			   "&j_password=" + resultVO.getUniqId();
+		} else {
+		    model.addAttribute("message",
+		                       egovMessageSource.getMessage("fail.common.login"));
+		    return "cmm/uat/uia/EgovLoginUsr";
+		}
+	} else {
+		model.addAttribute("message",
+		                   egovMessageSource.getMessage("fail.common.login"));
+		return "cmm/uat/uia/EgovLoginUsr";
+	}
+}
+```
+## 환경설정
+GPKI 인증 기능을 활용하기 위하여 필요한 항목 및 그 환경 설정은 다음과 같다.
+#### GPKI API 설치파일 확인
+먼저 GPKI 인증서 로그인 기능을 위해서는 행정전자서명 인증관리센터(http://www.gpki.go.kr)에서 시스템에 맞는 표준보안 API를 신청하여 발급받아야 한다.
+서버로 구성할 OS별로 구분된 표준보안 API가 제공되며 다른 시스템에서 사용할수 없다.
+## 참고자료
+N/A

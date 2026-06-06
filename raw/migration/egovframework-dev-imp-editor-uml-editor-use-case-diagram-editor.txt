@@ -1,0 +1,40 @@
+# id: egovframework-dev-imp-editor-uml-editor-use-case-diagram-editor
+# title: Use Case Diagram Editor
+# category: development
+# source_url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Adev%3Aimp%3Aeditor%3Auml_editor%3Ause_case_diagram_editor
+# collected_by: collect_egov_wiki.py
+
+====== Use Case Diagram Editor ======
+===== 개요 =====
+Use Case 를 그릴 수 있도록 툴바와 편집창을 제공한다. 
+
+{{:egovframework:dev:imp:editor:uml_editor:newfile.ucd1.gif|}}
+
+===== 설명 =====
+  - Select : 편집창의 개체를 선택할 수 있도록 한다. 선택은 주로 개체의 이동을 위해 선택.
+  - Marquee : 영역을 선택하여 여러 개체를 선택할 수 있도록 한다. Select 와 다른 점은 개체를 이동시키지 못한다.
+  - Note : 설명을 달기위해 사용하는 개체.
+  - Anchor to Note : Note와 Note가 설명하고 있는 개체를 연결하는 선.
+  - Actor : 실행유발개체를 표시하는 아이콘으로 사람, 시스템 등으로 사용될 수 있다.
+  - Use Case : Use Case 아이콘 
+  - System : System 영역을 표시.
+  - Relation : 개체간의 관계를 긋는데 사용
+  - Generalization : Use Case 에서 일반화 개념, 상속 개념을 표현할 때 사용
+  - Include : Use Case 에서 포함관계를 나타낼 경우 사용
+  - Extend : Use Case 에서 확장관계를 나타낼 경우 사용
+　　　　{{:egovframework:dev:imp:editor:uml_editor:ucd_toolbar1.gif|}}
+
+
+
+===== 사용법 =====
+  - 컨텍스트 메뉴에서 New > Other > AmaterasUML > Usecase Diagram ({{:egovframework:dev:imp:editor:uml_editor:ucd_new_menu.gif|}})선택하여 파일을 생성한다.
+  - Use Case 아이콘을 선택한 후 편집창에 올려 놓는다.
+  - 더블클릭으로 Use Case 이름을 변경한다.
+  - Actor 아이콘을 선택한 후 편집창에 올려 놓는다.
+  - 더블클릭으로 Actor 의 명칭을 변경한다.
+  - Relation 아이콘을 선택하여 Actor와 Usecase 간에 관계를 맺는다.
+  - System 아이콘을 선택하여 영역을 그리고 System명을 붙인다.
+
+===== 샘플 =====
+　　　　{{:egovframework:dev:imp:editor:uml_editor:ucd_content.gif|}}
+

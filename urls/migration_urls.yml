@@ -45,11 +45,11 @@ documents:
     url: "SqlMapClientFactoryBean"
 
   - id: egov35-psl-data-access
-  title: Data Access 서비스
-  category: migration-reference
-  url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3.5:psl:data_access"
+    title: Data Access 서비스
+    category: migration-reference
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3.5:psl:data_access"
 
-- id: egov3-psl-dataaccess-spring-ibatis-integration
-  title: Spring-iBATIS Integration
-  category: migration-reference
-  url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3:psl:dataaccess:spring_ibatis_integration"
+  - id: egov3-psl-dataaccess-spring-ibatis-integration
+    title: Spring-iBATIS Integration
+    category: migration-reference
+    url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte3:psl:dataaccess:spring_ibatis_integration"

@@ -1,0 +1,96 @@
+# id: egovframework-dev-imp-editor-ide
+# title: IDE
+# category: development
+# source_url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Adev%3Aimp%3Aeditor%3Aide
+# collected_by: collect_egov_wiki.py
+
+====== IDE ======
+
+===== 개요 =====
+ 
+eGovFrame기반의 어플리케이션 개발 시 개발자 편의성을 위하여 eclipse기반의 Perspective, Menu, 프로젝트 생성 마법사 등을 제공한다.
+
+===== 설명 =====
+
+기본 Eclipse IDE 에 eGovFramework기반의 어플리케이션 개발을 위한 View 초기세트와 LayOut, 메뉴, 프로젝트 생성 마법사 등을 추가했고, 상세는 다음과 같다.
+
+== Perspective ==
+eGovFrame기반의 어플리케이션 개발을 위한 최적의 View 초기 세트와 레이아웃을 제공한다.
+
+== Menu ==
+eGovFrame Perspective에서만 활성화 되는 메뉴로 eclipse내에서 분산되어 있는 플러그인들의 기능(eGovFrame에서 필히 사용되어지는 기능)을 빠르게 접근할 수 있는 통합 메뉴를 제공한다.
+
+== 프로젝트 생성 마법사 ==
+eGovFrame기반의 어플리케이션을 빌드하기 위한 소스 코드 및 관련 파일의 구조와 빌더 설정을 담고 있는 프로젝트 생성 마법사를 제공한다.
+  * Core Project : 비즈니스 서비스 개발을 위한 프로젝트로 Model, Vo, DAO, Service등을 개발 한다. 
+  * Web Project : 웹 어플리케이션의 UI 개발을 위한 프로젝트로 Web Application설정 및 Controller, JSP, Css, JavaScript등을 개발 한다.
+===== 사용법 =====
+
+=== 1. eGovFramework Pespective ===
+  - Workbench 오른쪽 위의 바로가기 표시줄에 있는 **Open Perspective**단추 {{:egovframework:dev:imp:editor:ide:new_persp.gif|}}를 클릭한다. 메뉴 표시줄의 **__W__indows** > **__O__pen Perspective** 메뉴와 동일한 기능을 제공한다.
+  - 전체 Perspective 목록을 보려면 드롭 다운 메뉴에서 **__O__ther...**를 선택한다.
+  - **eGovFramework** Perspective를 선택한다.
+  - 제목 표시줄이 변경되어 **eGovFramwork**이 표시된다.
+
+{{:egovframework:dev:imp:editor:ide:egov_per2.png|}}
+
+{{:egovframework:dev:imp:editor:editor_egov.png?800|}}
+
+=== 2. eGovFramework Menu ===
+Perspective를 eGovFramework으로 변경하면 메뉴 표시줄에 **e__G__ovFramework** 메뉴가 표시된다.
+
+{{:egovframework:dev:imp:editor:ide:egov_menu2.png|}}
+
+^구분^메뉴^설명^
+| __S__tart | New __C__ore Project | New eGovFramework Core Project 생성 마법사 실행 |
+| | New __W__eb Project | New eGovFramework Web Project 생성 마법사 실행 |
+| __A__nalysis | New __U__secase Diagram | New Usecase Diagram 생성 마법사 실행 |
+| __D__esign | New __E__R Diagram | New ER Diagram 생성 마법사 실행 |
+| | New __C__lass Diagram | New Class Diagram 생성 마법사 실행 |
+| __I__mplementation | New SQL Map Config  | New SQLMap Config 생성 마법사 실행 |
+| | New SQL Map | New SQLMap 생성 마법사 실행 |
+| | Show DBIO Search View | DBIO Search View 표시 |
+
+=== 3. eGovFramework 프로젝트 생성 마법사 ===
+== 3.1. Core Project 생성 마법사 ==
+  - 메뉴 표시줄에서 **__F__ile** > **__N__ew** > **eGovFramework Core Project**를 선택한다. (단 eGovFramework Perspective내에서) \\ 또는, **Ctrl+N** 단축키를 이용하여 새로작성 마법사를 실행한 후 **eGovFramework** > **eGovFramework Core Project**을 선택하고 **__N__ext**를 클릭한다. \\ {{:egovframework:dev:imp:editor:ide:ide_001.png|}}
+  - 프로젝트명과 메이븐 설정에 필요한 값들을 입력하고 **Next**를 클릭한다. \\ {{:egovframework:dev:imp:editor:ide:ide_003.png|}}
+  - 예제 소스 파일 생성 여부를 체크하고 **Finish**를 클릭한다. \\ {{:egovframework:dev:imp:editor:ide:ide_004.png|}}
+
+** Create a eGovFramework Core Project 페이지 **
+^옵션^설명^기본값^
+| Project Name | 새 프로젝트 이름을 입력한다. | 공백 |
+| 컨텐츠 | Use default Workspace location체크시 기본 작업공간에 프로젝트 명으로 프로젝트 디렉토리가 생성된다. \\ 임의의 디렉토리 선택시 옵션을 해제하고 **Brows__e__**버튼을 클릭하여 위치를 선택한다. | Use default Workspace location |
+| Group Id | Maven에서의 Group Id를 입력한다. | 공백 |
+| Artifact Id | Maven에서의 Artifact Id를 입력한다. | 공백 |
+| Version | Maven에서의 버젼을 입력한다. | 0.0.1-SNAPSHOT |
+
+
+** Generate Example 페이지 **
+^옵션^설명^기본값^
+| Generate Example | 프로젝트 생성시 예제 소스 포함 여부를 선택한다. | false |
+
+== 3.2. Web Project 생성 마법사 ==
+  - 메뉴 표시줄에서 **__F__ile** > **__N__ew** > **eGovFramework Web Project**를 선택한다. (단 eGovFramework Perspective내에서) \\ 또는, **Ctrl+N** 단축키를 이용하여 새로작성 마법사를 실행한 후 **eGovFramework** > **eGovFramework Web Project**을 선택하고 **__N__ext**를 클릭한다. \\ {{:egovframework:dev:imp:editor:ide:ide_002.png|}}
+  - 프로젝트명과 메이븐 설정에 필요한 값들을 입력하고 **Next**를 클릭한다. \\ {{:egovframework:dev:imp:editor:ide:ide_005.png|}}
+  - 예제 소스 파일 생성 여부를 체크하고 **Finish**를 클릭한다.
+** Create a eGovFramework Web Project 페이지 **
+^옵션^설명^기본값^
+| Project Name | 새 프로젝트 이름을 입력한다. | 공백 |
+| 컨텐츠 | Use default Workspace location체크시 기본 작업공간에 프로젝트 명으로 프로젝트 디렉토리가 생성된다. \\ 임의의 디렉토리 선택시 옵션을 해제하고 **Brows__e__**버튼을 클릭하여 위치를 선택한다. | Use default Workspace location |
+| Target Runtime | 웹 어플리케이션을 실행할 타겟 서버를 선택한다. | <none> |
+| Dynamic Web Module Version | 동적 웹 모듈 버젼을 선택한다. | 2.5 |
+| Artifact Id | Maven에서의 Artifact Id를 입력한다. | 공백 |
+| Version | Maven에서의 버젼을 입력한다. | 0.0.1-SNAPSHOT |
+
+
+** Generate Example 페이지 **
+^옵션^설명^기본값^
+| Generate Example | 프로젝트 생성시 예제 소스 포함 여부를 선택한다. | false |
+
+**※ 프로젝트 생성 후 pom.xml파일의 레파지토리 정보를 각 프로젝트의 개발환경 정보로 변경한다.**
+
+
+
+
+===== 참고자료 ====

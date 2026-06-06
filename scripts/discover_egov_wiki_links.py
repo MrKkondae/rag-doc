@@ -36,6 +36,10 @@ DENY_ID_KEYWORDS = [
     "compa",
 ]
 
+ALLOWED_LEGACY_PREFIXES = [
+    "egovframework:rte2:brte:batch_core:",
+]
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -56,6 +60,25 @@ def normalize_page_id(page_id: str) -> str:
     return page_id
 
 
+def get_allowed_legacy_prefix(page_id: str, source: str) -> str | None:
+    if source != "rte43":
+        return None
+
+    for prefix in ALLOWED_LEGACY_PREFIXES:
+        if page_id.startswith(prefix):
+            return prefix
+
+    return None
+
+
+def get_page_tags(page_id: str, source: str) -> list[str]:
+    legacy_prefix = get_allowed_legacy_prefix(page_id, source)
+    if legacy_prefix:
+        return ["legacy", "rte2", "batch"]
+
+    return []
+
+
 def classify_page_id(page_id: str, source: str) -> tuple[bool, str | None]:
     page_id = normalize_page_id(page_id)
 
@@ -67,6 +90,9 @@ def classify_page_id(page_id: str, source: str) -> tuple[bool, str | None]:
             return False, f"denied_keyword:{keyword}"
 
     if source == "rte43":
+        legacy_prefix = get_allowed_legacy_prefix(page_id, source)
+        if legacy_prefix:
+            return True, f"allowed_legacy_prefix:{legacy_prefix}"
         if page_id.startswith("egovframework:rte2"):
             return False, "excluded_prefix:rte2"
         if page_id.startswith("egovframework:mrte"):
@@ -79,9 +105,44 @@ def classify_page_id(page_id: str, source: str) -> tuple[bool, str | None]:
             return True, None
         if page_id.startswith("egovframework:rte3"):
             return True, None
+        if page_id.startswith("egovframework:let4"):
+            return True, None
         return False, "not_in_rte43_allowlist"
 
     return True, None
+
+
+def run_self_checks() -> None:
+    assert classify_page_id("egovframework:let4.0:configration", "rte43") == (True, None)
+    assert classify_page_id("egovframework:let4:configration", "rte43") == (True, None)
+    assert classify_page_id("egovframework:rte4.3", "rte43") == (True, None)
+    assert classify_page_id("egovframework:rte3.5:psl:data_access", "rte43") == (True, None)
+    assert classify_page_id("egovframework:dev4.3", "rte43")[0] is False
+    assert classify_page_id("egovframework:rte2:brte:batch_core:job", "rte43") == (
+        True,
+        "allowed_legacy_prefix:egovframework:rte2:brte:batch_core:",
+    )
+    assert classify_page_id("egovframework:rte2:brte:other", "rte43") == (
+        False,
+        "excluded_prefix:rte2",
+    )
+    assert get_page_tags("egovframework:rte2:brte:batch_core:job_launcher", "rte43") == [
+        "legacy",
+        "rte2",
+        "batch",
+    ]
+    assert (
+        extract_page_id_from_url(
+            "https://www.egovframe.go.kr/wiki/doku.php"
+            "?id=egovframework:let4.0:configration&s[]=egovabstractmapper"
+        )
+        == "egovframework:let4.0:configration"
+    )
+    assert (
+        to_normal_url("egovframework:let4.0:configration")
+        == "https://www.egovframe.go.kr/wiki/doku.php"
+        "?id=egovframework%3Alet4.0%3Aconfigration"
+    )
 
 
 def load_seed_documents(seed_file: Path) -> list[dict]:
@@ -144,6 +205,20 @@ def make_doc_id(page_id: str) -> str:
     return doc_id
 
 
+def make_document_entry(page_id: str, title: str, category: str, source: str) -> dict:
+    document = {
+        "id": make_doc_id(page_id),
+        "title": title,
+        "category": category,
+        "url": to_normal_url(page_id),
+        "page_id": page_id,
+    }
+    tags = get_page_tags(page_id, source)
+    if tags:
+        document["tags"] = tags
+    return document
+
+
 def find_content_root(soup: BeautifulSoup):
     content = soup.find(id="dokuwiki__content")
     if content:
@@ -166,7 +241,7 @@ def remove_toc_blocks(content_root) -> None:
         toc.decompose()
 
 
-def discover_links_from_page(url: str, source: str) -> tuple[dict[str, str], Counter]:
+def discover_links_from_page(url: str, source: str) -> tuple[dict[str, str], Counter, Counter]:
     html = fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
     content_root = find_content_root(soup)
@@ -174,6 +249,7 @@ def discover_links_from_page(url: str, source: str) -> tuple[dict[str, str], Cou
 
     discovered = {}
     excluded_counts = Counter()
+    allowed_legacy_counts = Counter()
 
     for a in content_root.find_all("a", href=True):
         href = a["href"]
@@ -188,11 +264,13 @@ def discover_links_from_page(url: str, source: str) -> tuple[dict[str, str], Cou
             if reason:
                 excluded_counts[reason] += 1
             continue
+        if reason and reason.startswith("allowed_legacy_prefix:"):
+            allowed_legacy_counts[reason] += 1
 
         title = a.get_text(" ", strip=True) or page_id
         discovered[page_id] = title
 
-    return discovered, excluded_counts
+    return discovered, excluded_counts, allowed_legacy_counts
 
 
 def save_discovered_documents(documents: list[dict], out_file: Path) -> None:
@@ -208,6 +286,7 @@ def save_discovered_documents(documents: list[dict], out_file: Path) -> None:
 
 
 def main() -> None:
+    run_self_checks()
     args = parse_args()
     source = args.source
     seed_file = BASE_DIR / "urls" / f"{source}_urls.yml"
@@ -220,6 +299,7 @@ def main() -> None:
 
     discovered_pages: dict[str, dict] = {}
     excluded_counts = Counter()
+    allowed_legacy_counts = Counter()
 
     for doc in seed_docs:
         seed_page_id = extract_page_id_from_url(doc["url"])
@@ -229,28 +309,31 @@ def main() -> None:
                 if reason:
                     excluded_counts[f"seed:{reason}"] += 1
                 continue
-            discovered_pages[seed_page_id] = {
-                "id": make_doc_id(seed_page_id),
-                "title": doc.get("title", seed_page_id),
-                "category": doc.get("category", "seed"),
-                "url": to_normal_url(seed_page_id),
-                "page_id": seed_page_id,
-            }
+            if reason and reason.startswith("allowed_legacy_prefix:"):
+                allowed_legacy_counts[reason] += 1
+            discovered_pages[seed_page_id] = make_document_entry(
+                seed_page_id,
+                doc.get("title", seed_page_id),
+                doc.get("category", "seed"),
+                source,
+            )
 
     for doc in tqdm(seed_docs, desc="Discovering links"):
         try:
-            links, page_excluded_counts = discover_links_from_page(doc["url"], source)
+            links, page_excluded_counts, page_allowed_legacy_counts = discover_links_from_page(
+                doc["url"], source
+            )
             excluded_counts.update(page_excluded_counts)
+            allowed_legacy_counts.update(page_allowed_legacy_counts)
 
             for page_id, title in links.items():
                 if page_id not in discovered_pages:
-                    discovered_pages[page_id] = {
-                        "id": make_doc_id(page_id),
-                        "title": title,
-                        "category": doc.get("category", "discovered"),
-                        "url": to_normal_url(page_id),
-                        "page_id": page_id,
-                    }
+                    discovered_pages[page_id] = make_document_entry(
+                        page_id,
+                        title,
+                        doc.get("category", "discovered"),
+                        source,
+                    )
 
             print(f"[OK] {doc['id']} - discovered {len(links)} links")
 
@@ -265,6 +348,10 @@ def main() -> None:
     print()
     print(f"Discovered documents: {len(documents)}")
     print(f"Output file: {out_file.relative_to(BASE_DIR)}")
+    if allowed_legacy_counts:
+        print("Allowed legacy prefix summary:")
+        for reason, count in sorted(allowed_legacy_counts.items()):
+            print(f"- {reason}: {count}")
     if excluded_counts:
         print("Excluded page_id summary:")
         for reason, count in sorted(excluded_counts.items()):

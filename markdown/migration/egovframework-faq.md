@@ -1,0 +1,153 @@
+---
+id: "egovframework-faq"
+title: "FAQ관리"
+version: "4.3"
+category: "common"
+source: "eGovFrame Wiki"
+source_url: "https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Afaq%EA%B4%80%EB%A6%AC"
+format: "markdown"
+---
+
+# 공통서비스 - FAQ관리
+## 개요
+시스템 또는 서비스 이용 시 많은 사람들이 빈번히 하는 질문들에 대해 별도로 관리하여 이에 관한 응답을 쉽게 찾아볼 수 있도록 구성되어 있다
+## 설명
+FAQ관리기능은 크게 **FAQ목록조회**, **FAQ상세조회**, **FAQ내용등록**, **FAQ내용수정** 기능으로 구성되어 있다.(관련기능 부분참조)
+##### 관련소스
+| 유형 | 대상소스명 | 비고 |
+| --- | --- | --- |
+| Controller | egovframework.com.uss.olh.faq.web.EgovFaqManageController.java | FAQ관리를 위한 컨트롤러 클래스 |
+| Service | egovframework.com.uss.olh.faq.service.EgovFaqManageService.java | FAQ관리를 위한 서비스 인터페이스 |
+| ServiceImpl | egovframework.com.uss.olh.faq.service.impl.EgovFaqManageServiceImpl.java | FAQ관리를 위한 서비스 구현 클래스 |
+| VO | egovframework.com.uss.olh.faq.service.FaqManageVO.java | FAQ관리를 위한 VO 클래스 |
+|  | egovframework.com.uss.olh.faq.service.FaqManageDefaultVO.java | FAQ관리를 위한 SearchVO 클래스 |
+| DAO | egovframework.com.uss.olh.faq.service.imp.FaqManageDAO.java | FAQ 관리를 위한 데이터처리 클래스 |
+| JSP | /WEB-INF/jsp/egovframework/uss/olh/faq/EgovFaqListInqire.jsp | FAQ관리를 위한 목록조회 페이지 |
+|  | /WEB-INF/jsp/egovframework/uss/olh/faq/EgovFaqDetailInqire.jsp | FAQ관리를 위한 상세조회 페이지 |
+|  | /WEB-INF/jsp/egovframework/uss/olh/faq/EgovFaqCnRegist.jsp | FAQ관리를 위한 등록 페이지 |
+|  | /WEB-INF/jsp/egovframework/uss/olh/faq/EgovFaqCnUpdt.jsp | FAQ관리를 위한 수정 페이지 |
+| Query XML | resources/egovframework/sqlmap/com/uss/olh/faq/EgovFaqManage_SQL.xml | FAQ관리(조회,등록,수정,삭제)를 위한 Query XML |
+| Validator Rule XML | resources/egovframework/validator/validator-rules.xml | Validator Rule을 정의한 XML |
+| Validator XML | resources/egovframework/validator/com/uss/olh/faq/EgovFaqManage_SQL.xml | FAQ관리를 위한 Validator XML |
+| Message properties | resources/egovframework/message/message-common_ko_KR.properties | FAQ관리를 위한 Message properties |
+| Idgen XML | resources/egovframework/spring/context-idgen.xml | FAQ등록을 위한 Id생성 Idgen XML |
+
+**클래스다이어그램**
+
+[이미지]
+##### 관련테이블
+| 테이블명 | 테이블명(영문) | 비고 |
+| --- | --- | --- |
+| FAQ정보 | COMTNFAQINFO | 서비스 이용 시 빈번히 하는 질문 및 이에 대한 답변 관리 |
+## 관련기능
+FAQ관리기능은 크게 **FAQ목록조회**, **FAQ상세조회**, **FAQ내용등록**, **FAQ내용수정** 기능으로 구성되어 있다.
+### FAQ목록조회
+#### 비즈니스 규칙
+조회조건으로 목록조회를 할 수 있고, 등록버튼을 클릭하여 FAQ등록 화면으로 이동하여 FAQ를 등록 처리 할 수 있다.
+#### 관련코드
+N/A
+#### 관련화면 및 수행매뉴얼
+| Action | URL | Controller method | QueryID |
+| --- | --- | --- | --- |
+| 조회 | /uss/olh/faq/FaqListInqire.do | selectFaqList | "FaqManageDAO.selectFaqList" |
+|  | /uss/olh/faq/FaqListInqire.do | selectFaqListTotCnt | "FaqManageDAO.selectFaqListTotCnt" |
+| 등록 | /uss/olh/faq/FaqCnRegistView.do | insertFaqCnView |
+|  | /uss/olh/faq/FaqCnRegist.do | insertFaqCn | "FaqManageDAO.insertFaqCn" |
+| 목록클릭 | /uss/olh/faq/FaqListDetailInqire.do | selectFaqListDetail | "FaqManageDAO.selectFaqListDetail" |
+
+FAQ 목록은 페이지 당 10건씩 조회되며 페이징은 10페이지씩 이루어진다.
+검색조건은 용어명, 영문명에 대해서 수행된다. 페이지 당 검색 범위를 변경하고자 하는 경우
+context-properties.xml 파일의 pageUnit, pageSize를 변경한다.(단 해당 설정은 전체 공통서비스 기능에 영향을 미친다.)
+
+[이미지]
+
+조회: FAQ를 조회하기 위해서는 상단의 검색조건을 선택 후 해당하는 검색문자를 입력 후 조회 버튼을 클릭한다.
+등록: FAQ를 등록하기 위해서는 상단의 등록 버튼을 통해서 **FAQ등록** 화면으로 이동한다.
+목록클릭: **FAQ상세조회** 화면으로 이동한다.
+----
+### FAQ상세조회
+#### 비즈니스 규칙
+FAQ목록조회에서 목록 클릭 시 이동되는 화면으로 FAQ에 대한 상세정보를 보여준다.
+#### 관련코드
+ N/A
+#### 관련화면 및 수행매뉴얼
+| Action | URL | Controller method | QueryID |
+| --- | --- | --- | --- |
+| 수정 | /uss/olh/faq/FaqCnUpdtView.do | updateFaqCnView |
+| 삭제 | /uss/olh/faq/FaqCnDelete.do | deleteFaqCn | "FaqManageDAO.deleteFaqCn" |
+| 목록 | /uss/olh/faq/FaqListInqire.do | selectFaqList | "FaqManageDAO.selectFaqList" |
+
+FAQ 상세조회화면은 FAQ내용수정, FAQ내용삭제, FAQ목록조회를 할 수 있다.
+
+[이미지]
+
+수정: 수정버튼 클릭 시 FAQ를 수정할 수 있는 화면으로 이동한다.
+삭제: 삭제버튼 클릭 시 삭제여부를 확인하는 메세지를 보여주고 삭제처리를 할 수 있다.
+목록: **FAQ목록조회** 화면으로 이동한다.
+----
+### FAQ내용등록
+#### 비즈니스 규칙
+- 입력명 우측의 빨간* 표시는 반드시 입력해야할 항목을 표시한다.
+- 저장처리 시 FAQ_ID 컬럼은 "egovframework.rte.fdl.idgnr.impl.EgovTableIdGnrService"를 통하여
+  Primary Key => FAQ_ID(20자리) : FAQ_(4자리) + 일련번호(16자리)로 자동생성 부여된다.
+
+	<bean name="egovFaqManageIdGnrService"
+		class="egovframework.rte.fdl.idgnr.impl.EgovTableIdGnrService"
+		destroy-method="destroy">
+		<property name="dataSource" ref="dataSource" />
+		<property name="strategy"   ref="faqManageStrategy" />
+		<property name="blockSize" 	value="10"/>
+		<property name="table"	   	value="COMTECOPSEQ"/>
+		<property name="tableName"	value="FAQ_ID"/>
+	</bean>
+
+	<bean name="faqManageStrategy"
+		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl">
+		<property name="prefix" value="FAQ_" />
+		<property name="cipers" value="16" />
+		<property name="fillChar" value="0" />
+	</bean>
+#### 관련코드
+ N/A
+#### 관련화면 및 수행매뉴얼
+| Action | URL | Controller method | QueryID |
+| --- | --- | --- | --- |
+| 목록 | /uss/olh/faq/HpcmListInqire.do | selectHpcmList | "HpcmManageDAO.selectHpcmList" |
+| 저장 | /uss/olh/faq/HpcmCnRegist.do | insertHpcmCn | "HpcmManageDAO.insertHpcmCn" |
+
+FAQ에 관한 기본정보를 입력 저장처리한다.
+
+[이미지]
+
+파일첨부 시 찾아보기를 클릭하여 파일을 첨부할 수 있다(최대 3개 가능 - 설정가능)
+
+[이미지]
+
+목록: **FAQ목록조회** 화면으로 이동한다.
+저장: 입력한 FAQ정보들이 저장 처리된다.
+----
+### FAQ내용수정
+#### 비즈니스 규칙
+- 입력명 우측의 빨간* 표시는 수정 시 반드시 입력해야 할 항목을 표시한다.
+#### 관련코드
+ N/A
+#### 관련화면 및 수행매뉴얼
+| Action | URL | Controller method | QueryID |
+| --- | --- | --- | --- |
+| 수정 | /uss/olh/faq/FaqCnUpdt.do | updateFaqCn | "FaqManageDAO.updateFaqCn" |
+| 목록 | /uss/olh/faq/FaqListInqire.do | selectFaqList | "FaqManageDAO.selectFaqList" |
+
+입력한 FAQ정보들을 저장 처리한다.
+
+[이미지]
+
+파일첨부 시 찾아보기를 클릭하여 파일을 첨부할 수 있다(최대 3개 가능 - 설정가능)
+
+[이미지]
+
+
+수정: 수정 입력한 FAQ정보들이 저장 처리된다.
+목록: **FAQ목록조회** 화면으로 이동한다.
+----
+## 참고자료
+N/A
