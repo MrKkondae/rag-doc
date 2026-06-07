@@ -27,6 +27,11 @@ def parse_args() -> argparse.Namespace:
         default=TOP_K,
         help="Number of search results to show",
     )
+    parser.add_argument(
+        "--query",
+        required=False,
+        help="Search query. If provided, run once and exit.",
+    )  
     return parser.parse_args()
 
 
@@ -138,13 +143,6 @@ def cosine_search(
         chunk = chunks[idx]
         boost = keyword_boost(query, chunk)
 
-        if chunk.get("document_title") == "ItemWriter":
-            print(
-                chunk.get("heading"),
-                vector_score,
-                boost
-            )
-
         final_score = float(vector_score) + boost
 
         results.append((idx, float(vector_score), boost, final_score))
@@ -236,6 +234,10 @@ def main() -> None:
     source = args.source
     top_k = args.top_k
     embedding_file = BASE_DIR / "embeddings" / f"{source}_embeddings.pkl"
+
+    if args.query:
+        search(args.query, embedding_file, top_k)
+        return
 
     print("eGovFrame chunk search")
     print(f"source: {source}")

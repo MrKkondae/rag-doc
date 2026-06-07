@@ -36,7 +36,6 @@ protobuf==7.35.0
 pydantic==2.13.4
 pydantic_core==2.46.4
 Pygments==2.20.0
-pywin32==311
 PyYAML==6.0.3
 qdrant-client==1.18.0
 regex==2026.5.9
@@ -53,9 +52,9 @@ soupsieve==2.8.4
 sympy==1.13.1
 threadpoolctl==3.6.0
 tokenizers==0.20.3
-torch==2.5.1+cpu
-torchaudio==2.5.1+cpu
-torchvision==0.20.1+cpu
+torch==2.5.1
+torchaudio==2.5.1
+torchvision==0.20.1
 tqdm==4.67.3
 transformers==4.46.3
 typer==0.25.1

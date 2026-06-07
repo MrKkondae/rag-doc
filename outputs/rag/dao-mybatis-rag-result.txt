@@ -1,0 +1,140 @@
+embedding source: migration
+loading model: BAAI/bge-m3
+
+query: EgovAbstractDAO MyBatis MapperConfigurer SqlSessionFactoryBean
+Top 5 results
+
+====================================================================================================
+[1] score: 0.5161
+document_title: Session 방식 접근제어 권한설정
+heading: Session 접근제어 설정
+category: migration
+tags: datasource, migration, sql, validation, xml
+source_file: egovframework-rte4-3-fdl-access.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aaccess
+----------------------------------------------------------------------------------------------------
+Session 방식 접근제어 권한관리에 대한 기본 설정 정보를 제공한다.  예: ```xml <egov-access:config id="egovAccessConfig" 	globalAuthen="session" 	mappingPath="/**/*.do" 	dataSource="egov.dataSource" 	loginUrl="/uat/uia/egovLoginUsr.do" 	accessDeniedUrl="/uat/uia/egovLoginUsr.do?auth_error=1" 	sqlAuthorityUser="SELECT CONCAT(B.USER_SE, B.USER_ID) USERID, A.AUTHOR_CODE AUTHORITY 		FROM COMTNEMPLYRSCRTYESTBS A, COMVNUSERMASTER B 		WHERE A.SCRTY_DTRMN_TRGET_ID = B.ESNTL_ID" 	sqlRoleAndUrl="SELECT A.ROLE_PTTRN URL, B.AUTHOR_CO
+
+vector_score: 0.5161, keyword_boost: 0.0000, final_score: 0.5161
+====================================================================================================
+[2] score: 0.5123
+document_title: Session 방식 접근제어 권한설정
+heading: 속성 설명
+category: migration
+tags: datasource, migration, sql
+source_file: egovframework-rte4-3-fdl-access.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aaccess
+----------------------------------------------------------------------------------------------------
+| 속성 | 설명 | 필수여부 | 비고 | | --- | --- | --- | --- | | globalAuthen | globals.properties 설정과 동일하게 적용 (Globals.Auth = session 설정 사용시 globalAuthen = “session”으로 값을 동일하게 일치하여 설정 필요) | 필수 |  | | dataSource | DBMS 설정 dataSource | 필수 |  | | loginUrl | 로그인 페이지 URL | 필수 |  | | accessDeniedUrl | 권한이 없는 경우 호출되는 페이지 URL | 필수 |  | | sqlAuthorityUser | 인증된 사용자의 권한(authority) 조회 query | 필수 |  | | sqlRoleAndUrl | Role 및 URL 패턴 | 필수 |  | | requestMatcherType | 패턴 매칭 방식(regex, ant, ciRegex: case-insensitive regex) 
+
+vector_score: 0.5123, keyword_boost: 0.0000, final_score: 0.5123
+====================================================================================================
+[3] score: 0.5059
+document_title: 설정 간소화
+heading: 속성 설명
+category: migration
+tags: dao, migration, sql, webmvc
+source_file: egovframework-rte4-3-fdl-server-security-xmlschema.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aserver_security%3Axmlschema
+----------------------------------------------------------------------------------------------------
+| 속성 | 설명 | 필수여부 | 비고 | | --- | --- | --- | --- | | roleHierarchyString | 계층처리를 위한 설정 문자열 지정 | 선택 | 미지정시 DB로부터 지정된 설정정보 지정 | | sqlRolesAndUrl | URL 방식 role 지정 query | 선택 | 미지정시 SecuredObjectDAO의 기본 query가 처리됨 | | sqlRolesAndMethod | method 방식 role 지정 query | 선택 | 〃 | | sqlRolesAndPointcut | pointcut 방식 role 지정 query | 선택 | 〃 | | sqlRegexMatchedRequestMapping | request 마다 best matching url 보호자원 지정 query | 선택 | 〃 | | sqlHierarchicalRoles | 계층처리를 위한 query | 선택 | 〃 |
+
+vector_score: 0.5059, keyword_boost: 0.0000, final_score: 0.5059
+====================================================================================================
+[4] score: 0.4940
+document_title: Session 방식 접근제어 권한설정
+heading: pom.xml (dependency추가)
+category: migration
+tags: fdl, maven, migration, runtime, xml
+source_file: egovframework-rte4-3-fdl-access.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Aaccess
+----------------------------------------------------------------------------------------------------
+Session 방식의 접근제어 권한관리를 사용하기 위해서는 표준프레임워크 실행환경 구성요소중 org.egovframe.rte.fdl.access 라이브러리가 설치되어야 한다.  ``` <dependency> 	<groupId>org.egovframe.rte</groupId> 	<artifactId>org.egovframe.rte.fdl.access</artifactId> 	<version>${org.egovframe.rte.version}</version> </dependency> ```
+
+vector_score: 0.4940, keyword_boost: 0.0000, final_score: 0.4940
+====================================================================================================
+[5] score: 0.4939
+document_title: crypto 간소화 서비스
+heading: context-datasource.xml 파일의 데이터베이스 연결 항목(Url, UserName, Password) 디코딩 연결 설정
+category: migration
+tags: datasource, file, migration, property, spring, sql, xml
+source_file: egovframework-rte4-3-fdl-crypto.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte4.3%3Afdl%3Acrypto
+----------------------------------------------------------------------------------------------------
+데이터베이스 설정 파일에서 데이터베이스 연결 항목을 디코딩 하는 설정 방법을 제공한다.  ```xml <?xml version="1.0" encoding="UTF-8"?> <beans 	xmlns="http://www.springframework.org/schema/beans" 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 	xmlns:util="http://www.springframework.org/schema/util" 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0
+
+vector_score: 0.4939, keyword_boost: 0.0000, final_score: 0.4939
+embedding source: rte43
+loading model: BAAI/bge-m3
+
+query: EgovAbstractDAO MyBatis MapperConfigurer SqlSessionFactoryBean
+Top 5 results
+
+====================================================================================================
+[1] score: 0.8612
+document_title: Data Access 서비스
+heading: Step4. DAO 클래스 생성
+category: rte43
+tags: dao, file, mybatis, rest, rte43, sql, xml
+source_file: egovframework-rte3-5-psl-data-access.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.5%3Apsl%3Adata_access
+----------------------------------------------------------------------------------------------------
+간단한 형태의 DAO 클래스를 생성한다. 아래의 DAO 에서 상속하고 있는 EgovAbstractDAO 에서는 SqlMapClientDaoSupport 를 extends 하고 있으며 iBATIS SQL Map 상호 작용을 위한 기본 클래스인 SqlMapClient (위에서 "sqlMapClient" 로 정의한 iBATIS 연동 FactoryBean 에 의해 제공됨) 에 대한 injection 처리가 내부적으로 적용되어 있고, 기본 CRUD 에 대한 iBATIS 실행을 위해서는 간략한 메서드 래핑도 제공한다. 상세 API 를 사용하고자 하는 경우 getSqlMapClientTemplate() 를 통해(ex. getSqlMapClientTemplate().queryWithRowHandler("selectEmpListToOutFileUsingRowHandler", paramObject, rowHandler); ) 사용할 수 있다.
+
+vector_score: 0.6412, keyword_boost: 0.2200, final_score: 0.8612
+====================================================================================================
+[2] score: 0.8604
+document_title: Data Access 서비스
+heading: DAO 클래스
+category: rte43
+tags: dao, mybatis, ptl, rte43, spring, sql, xml
+source_file: egovframework-rte3-5-psl-data-access.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3.5%3Apsl%3Adata_access
+----------------------------------------------------------------------------------------------------
+```java ..  @Repository("deptDAO") public class DeptDAO extends EgovAbstractDAO {      public void insertDept(DeptVO vo) {         insert("insertDept", vo);     }      public int updateDept(DeptVO vo) {         return update("updateDept", vo);     }      public int deleteDept(DeptVO vo) {         return delete("deleteDept", vo);     }      public DeptVO selectDept(DeptVO vo) {         return (DeptVO)selectByPk("selectDept", vo);     }      @SuppressWarnings("unchecked")     public List<DeptVO> s
+
+vector_score: 0.6404, keyword_boost: 0.2200, final_score: 0.8604
+====================================================================================================
+[3] score: 0.8472
+document_title: 경량환경 템플릿 구성 및 환경설정(configration)
+heading: egovframework/spring/com/context-*.xml 주요 설정
+category: rte43
+tags: dao, datasource, mybatis, property, rte43, spring, sql, transaction, xml
+source_file: egovframework-let4-0-configration.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Alet4.0%3Aconfigration
+----------------------------------------------------------------------------------------------------
+```xml <!-- 소스 내 DAO에서 사용할 쿼리문의 위치정보를 확인 bean 설정으로 Dao 클래스에서 extends하는 EgovAbstractMapper 내부에 포함하여 사용 -->     <!-- configLocations properties 항목에 쿼리문 위치정보 파일들을 등록(각 위치정보 파일 내에 실제 쿼리문들이 포함된 파일들의 위치정보가 존재) --> 	<!-- Mybatis setup for Mybatis Database Layer --> 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean"> 		<property name="dataSource" ref="dataSource"/> 		<property name="configLocation" value="classpath:/egovframework/mapper/config/mapper-config.xml" />  		<property name
+
+vector_score: 0.7072, keyword_boost: 0.1400, final_score: 0.8472
+====================================================================================================
+[4] score: 0.7700
+document_title: Excel Service
+heading: Excel 업로드
+category: rte43
+tags: fdl, file, mybatis, property, rte43, runtime, sql, xml
+source_file: egovframework-rte3-fdl-excel.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte3%3Afdl%3Aexcel
+----------------------------------------------------------------------------------------------------
+##### Configuration  ```xml <bean id="excelService"	class="egovframework.rte.fdl.excel.impl.EgovExcelServiceImpl"> 	<property name="mapClass" value="egovframework.rte.fdl.excel.upload.EgovExcelTestMapping" /> 	<property name="sqlSessionTemplate" ref="sqlSessionTemplate" /> </bean>  <bean id="excelBigService" class="egovframework.rte.fdl.excel.impl.EgovExcelServiceImpl"> 	<property name="mapClass" value="egovframework.rte.fdl.excel.upload.EgovExcelTestMapping" /> 	<property name="mapBeanName" val
+
+vector_score: 0.6600, keyword_boost: 0.1100, final_score: 0.7700
+====================================================================================================
+[5] score: 0.7668
+document_title: ItemWriter
+heading: EgovMyBatisBatchItemWriter 설정항목
+category: rte43
+tags: batch, mybatis, rte43, sql
+source_file: egovframework-rte2-brte-batch-core-item-writer-v3-7.md
+url: https://www.egovframe.go.kr/wiki/doku.php?id=egovframework%3Arte2%3Abrte%3Abatch_core%3Aitem_writer_v3.7
+----------------------------------------------------------------------------------------------------
+| 설정항목 | 내용 | 예시 | | --- | --- | --- | | sqlSessionFactory | reader에 별도로 구현한 sessionFactory | sqlSession | | statementId | 네임스페이스를 가진 매퍼 파일을 Query Id | EmpMapper.selectEmpList | | resourceVariable | 표준프레임워크 실행환경 Resource Variable 서비스를 사용하기 위한 설정 | resourceVariable | | jobVariable | 표준프레임워크 실행환경 Step Variable 서비스를 사용하기 위한 설정 | jobVariable | | stepVariable | 표준프레임워크 실행환경 Job Variable 서비스를 사용하기 위한 설정 | stepVariable |
+
+vector_score: 0.6568, keyword_boost: 0.1100, final_score: 0.7668
+
+===== SOURCE: migration =====
+
+
+===== SOURCE: rte43 =====
+
+
+

@@ -1,0 +1,8 @@
+name: eGov RAG
+version: 0.0.1
+schema: v1
+mcpServers:
+  - name: egov-rag
+    command: /Users/taeyong/project/rag-doc/.venv/bin/python
+    args:
+      - /Users/taeyong/project/rag-doc/mcp_server.py
